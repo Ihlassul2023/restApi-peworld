@@ -1,4 +1,4 @@
---REGISTER--
+--REGISTER USER--
 CREATE TABLE register_user (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -6,6 +6,8 @@ CREATE TABLE register_user (
     phone VARCHAR,
     password VARCHAR
 )
+
+--LOGIN--
 CREATE TABLE login (
     id SERIAL PRIMARY KEY,
     email VARCHAR,
