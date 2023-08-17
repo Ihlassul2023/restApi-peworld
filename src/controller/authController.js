@@ -20,11 +20,11 @@ const authController = {
         console.log(result.rows);
         return res
           .status(200)
-          .json(result, 'Registration success!');
+          .json({"status":200, "message" : "Registration success!", data:result.rows});
       }
     } catch (error) {
       console.error(error.message);
-      return res.status(500).json(error, 'Registration error!');
+      return res.status(500).json({"status":500, "message" : "Registration error!"});
     }
   },
 };
