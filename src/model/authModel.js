@@ -1,5 +1,18 @@
 const pool = require('../config/db')
 
+const getRegisterUser = async () => {
+    return new Promise((resolve,reject)=>{
+    console.log('Model: Get register users')
+        pool.query(`SELECT * FROM register_user`,(err,results)=>{
+            if(!err){
+                resolve(results)
+            } else{
+                reject(err)
+            }
+        })
+    })
+}
+
 const postRegisterUser = async (post) => {
     return new Promise((resolve, reject)=>{
         console.log('Model: Post/register users')
@@ -15,5 +28,6 @@ const postRegisterUser = async (post) => {
 }
 
 module.exports = {
+    getRegisterUser,
     postRegisterUser
 }

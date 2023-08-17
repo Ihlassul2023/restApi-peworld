@@ -1,8 +1,30 @@
-const {postRegisterUser} = require('../model/authModel')
+const { getRegisterUser, postRegisterUser } = require('../model/authModel');
 
 const authController = {
+  getUser: async (req, res) => {
+    try {
+      const result = await getRegisterUser();
+      if (result.rows.length > 0) {
+        console.log('Hasil get user', result.rows);
+        return res
+          .status(200)
+          .json({
+            status: 200,
+            message: 'Get register user success!',
+            data: result.rows,
+          });
+      } else {
+        console.log('Data tidak ditemukan');
+        return res
+          .status(404)
+          .json({ status: 404, message: 'Data register user not found!' });
+      }
+    } catch (error) {
+      console.error('Error saat get user:', error.message);
+      return res.status(500).json({ status: 500, message: 'Get user error!' });
+    }
+  },
   registerUser: async (req, res) => {
-    console.log('Control: Running register users');
     try {
       const { name, email, phone, password, photo, photo_id } = req.body;
 
@@ -17,16 +39,22 @@ const authController = {
 
       const result = await postRegisterUser(post);
       if (result) {
-        console.log(result.rows);
+        console.log('Hasil register user', result.rows);
         return res
           .status(200)
-          .json({"status":200, "message" : "Registration success!", data:result.rows});
+          .json({
+            status: 200,
+            message: 'Registration success!',
+            data: result.rows,
+          });
       }
     } catch (error) {
-      console.error(error.message);
-      return res.status(500).json({"status":500, "message" : "Registration error!"});
+      console.error('Error saat register user', error.message);
+      return res
+        .status(500)
+        .json({ status: 500, message: 'Registration error!' });
     }
   },
 };
 
-module.exports = authController
+module.exports = authController;
