@@ -4,6 +4,8 @@ const {
   postRegisterUser,
 } = require('../model/authModel');
 
+const {hashPassword, verifyPassword} = require('../middleware/bcrypt')
+
 const authController = {
   getUser: async (req, res) => {
     try {
@@ -55,7 +57,7 @@ const authController = {
         phone: phone,
         company: company,
         position: position,
-        password: password,
+        password: await hashPassword(password),
         photo: '',
         photo_id: '',
         validate: '',
