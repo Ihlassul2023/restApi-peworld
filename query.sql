@@ -8,10 +8,3 @@ CREATE TABLE register_user (
     photo VARCHAR,
     photo_id VARCHAR
 )
-
---LOGIN--
-CREATE TABLE login (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR NOT NULL,
-    password VARCHAR NOT NULL
-)
