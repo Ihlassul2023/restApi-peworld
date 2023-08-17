@@ -1,4 +1,6 @@
+-- Active: 1689385551112@@127.0.0.1@5432@kelompok3
 --REGISTER USER--
+<<<<<<< HEAD
 CREATE TABLE register_user (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -11,7 +13,7 @@ CREATE TABLE register_user (
     photo_id VARCHAR,
     validate VARCHAR,
     is_active BOOLEAN DEFAULT false
-);
+); 
 
 --PROFILE COMPANY--
 CREATE TABLE profile_company (
@@ -68,6 +70,9 @@ CREATE TABLE work_experience (
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+ALTER TABLE work_experience ADD COLUMN user_id INT NOT NULL;
+
+ALTER TABLE work_experience ADD FOREIGN KEY (user_id) REFERENCES profile_worker(id) ON DELETE CASCADE;
 
 --PORTOFOLIO--
 CREATE TABLE portofolio (
@@ -85,3 +90,15 @@ CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
     message_detail VARCHAR
 );
+=======
+CREATE TABLE experience (
+        id SERIAL PRIMARY KEY,
+        positon VARCHAR(200) NOT NULL,
+        company_name VARCHAR(200) NOT NULL,
+        fromMonth VARCHAR(255)NOT NULL,
+        toMonth VARCHAR(255) NOT NULL,
+        description VARCHAR(200) NOT NULL,
+    );
+ALTER TABLE experience ADD COLUMN user_id INT NOT NULL;
+ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+>>>>>>> fitur_lowongan
