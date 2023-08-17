@@ -6,6 +6,7 @@ const {
 
 const {hashPassword, verifyPassword} = require('../middleware/bcrypt')
 const cloudinary = require('../config/cloudinary');
+const {generateToken} = require('../middleware/jwt')
 
 const authController = {
   getUser: async (req, res) => {
@@ -109,9 +110,9 @@ const authController = {
       
       const isPasswordMatch = await verifyPassword(password, user.password)
       if(isPasswordMatch){
-        // delete user.password
-        // const token = generateToken(user)
-        // user.token = token
+        delete user.password
+        const token = generateToken(user)
+        user.token = token
         return res.status(200).json({
           status: 200,
           message: 'Login success!',

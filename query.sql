@@ -35,15 +35,16 @@ CREATE TABLE profile_worker (
     jobdesk VARCHAR,
     address VARCHAR,
     office VARCHAR,
-    description VARCHAR
-);
-
-
---SKILL WORKER--
-CREATE TABLE skills (
-    id SERIAL PRIMARY KEY,
+    description VARCHAR,
     skill VARCHAR
 );
+
+
+-- --SKILL WORKER gabung ke profile worker--
+-- CREATE TABLE skills (
+--     id SERIAL PRIMARY KEY,
+    
+-- );
 
 
 --WORK EXPERIENCE--
