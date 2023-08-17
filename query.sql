@@ -12,3 +12,65 @@ CREATE TABLE register_user (
     validate VARCHAR,
     is_active BOOLEAN DEFAULT false
 );
+
+--PROFILE COMPANY--
+CREATE TABLE profile_company (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR,
+    sector VARCHAR,
+    province VARCHAR,
+    city VARCHAR,
+    description VARCHAR,
+    email_hrd VARCHAR,
+    email_corp VARCHAR,
+    phone VARCHAR,
+    linkedin VARCHAR
+);
+
+
+--PROFILE WORKER--
+CREATE TABLE profile_worker (
+    id SERIAL PRIMARY KEY,
+    fullname VARCHAR,
+    jobdesk VARCHAR,
+    address VARCHAR,
+    office VARCHAR,
+    description VARCHAR
+);
+
+
+--SKILL WORKER--
+CREATE TABLE skills (
+    id SERIAL PRIMARY KEY,
+    skill VARCHAR
+);
+
+
+--WORK EXPERIENCE--
+CREATE TABLE work_experience (
+    id SERIAL PRIMARY KEY,
+    position VARCHAR,
+    name VARCHAR,
+    since VARCHAR,
+    until VARCHAR,
+    description VARCHAR,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+
+--PORTOFOLIO--
+CREATE TABLE portofolio (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR,
+    link_repo VARCHAR,
+    type VARCHAR,
+    photo VARCHAR,
+    photo_id VARCHAR,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+--MESSAGE MENU--
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    message_detail VARCHAR
+);
