@@ -5,6 +5,7 @@ const {
 } = require('../model/authModel');
 
 const {hashPassword, verifyPassword} = require('../middleware/bcrypt')
+const cloudinary = require('../config/cloudinary');
 
 const authController = {
   getUser: async (req, res) => {
@@ -58,10 +59,20 @@ const authController = {
         company: company,
         position: position,
         password: await hashPassword(password),
-        photo: '',
-        photo_id: '',
         validate: '',
       };
+
+      if (req.file) {
+        const result_up = await cloudinary.uploader.upload(req.file.path, { folder: 'HireJob' });
+        console.log('Ini adalah hasil cloudinary', result_up);
+
+        post.photo = result_up.secure_url;
+        post.photo_id = result_up.public_id;
+      } else {
+        post.photo = 'https://i.ibb.co/M2JSRmW/noimage.png';
+        post.photo_id = 'no_image';
+      }
+
 
       const result = await postRegisterUser(post);
       if (result) {
