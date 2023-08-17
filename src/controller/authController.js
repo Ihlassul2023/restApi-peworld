@@ -26,7 +26,7 @@ const authController = {
   },
   registerUser: async (req, res) => {
     try {
-      const { name, email, phone, company, position, password, photo, photo_id } = req.body;
+      const { name, email, phone, company, position, password} = req.body;
 
       let post = {
         name: name,
@@ -35,8 +35,9 @@ const authController = {
         company: company,
         position: position,
         password: password,
-        photo: photo,
-        photo_id: photo_id,
+        photo: '',
+        photo_id: '',
+        validate: ''
       };
 
       const result = await postRegisterUser(post);
