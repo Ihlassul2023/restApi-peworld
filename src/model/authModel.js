@@ -13,6 +13,19 @@ const getRegisterUser = async () => {
     })
 }
 
+const getUserById = async (id) => {
+    return new Promise((resolve,reject)=>{
+    console.log('Model: Get register users')
+        pool.query(`SELECT * FROM register_user WHERE id = ${id}`,(err,results)=>{
+            if(!err){
+                resolve(results)
+            } else{
+                reject(err)
+            }
+        })
+    })
+}
+
 const validateByEmail = async (email) => {
     return new Promise((resolve,reject)=>{
     console.log('Model: Get users by email', email)
@@ -40,8 +53,28 @@ const postRegisterUser = async (post) => {
     })
 }
 
+const putUserById = async (post) => {
+    return new Promise((resolve, reject) => {
+      console.log('Model: update data user');
+      const {name, email, phone, company, position, password, photo, photo_id, id} = post
+      pool.query(
+        `UPDATE register_user SET name = '${name}', email = '${email}', phone = '${phone}', company = '${company}', position = '${position}', password = '${password}', photo = '${photo}', photo_id = '${photo_id}' WHERE id = ${id} RETURNING *`,
+        (err, results) => {
+          if (!err) {
+            resolve(results);
+          } else {
+            reject(err);
+          }
+        }
+      );
+    });
+}
+
+
 module.exports = {
     getRegisterUser,
+    getUserById,
     validateByEmail,
-    postRegisterUser
+    postRegisterUser,
+    putUserById
 }

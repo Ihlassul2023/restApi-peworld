@@ -14,8 +14,8 @@ const protect = async (req,res,next) => {
     console.log(bearer)
 
     let decoded = await jwt.verify(bearer[1],process.env.SECRET);
-    console.log('decoded') 
-    console.log(decoded) 
+    // console.log('decoded') 
+    // console.log(decoded) 
     req.payload = decoded  
     next()
     } catch(error){

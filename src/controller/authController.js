@@ -1,7 +1,9 @@
 const {
   getRegisterUser,
+  getUserById,
   validateByEmail,
   postRegisterUser,
+  putUserById
 } = require('../model/authModel');
 
 const {hashPassword, verifyPassword} = require('../middleware/bcrypt')
@@ -81,7 +83,7 @@ const authController = {
         return res.status(200).json({
           status: 200,
           message: 'Registration success!',
-          data: result.rows,
+          data: result.rows[0],
         });
       }
     } catch (error) {
@@ -124,6 +126,65 @@ const authController = {
     } catch (error) {
       console.error('error ketika login', error)
       res.status(500).json({ status: 500, message: 'Login is failed!' })
+    }
+  },
+  editUser: async (req, res) => {
+    try {
+    const {id} = req.params
+    const {name, email, phone, company, position, password} = req.body
+
+    let dataUser = await getUserById(id);
+    let result_up = null;
+
+    if (req.file) {
+        // Jika req.file ada, upload gambar baru dan delete gambar lama
+        result_up = await cloudinary.uploader.upload(req.file.path, { folder: 'HireJob' });
+        await cloudinary.uploader.destroy(dataUser.rows[0].photo_id);
+    }
+
+    let post = {
+      id: id,
+      name: name,
+      email: email,
+      phone: phone,
+      company: company,
+      position: position,
+      password: await hashPassword(password)
+    }
+
+    if (result_up) {
+      // Jika gambar baru diupload, update properti image
+        post.photo = result_up.secure_url;
+        post.photo_id = result_up.public_id;
+    } else {
+        // Jika tidak ada gambar baru diupload, ambil gambar yang masih ada
+        post.photo = dataUser.rows[0].photo;
+        post.photo_id = dataUser.rows[0].photo_id;
+    }
+
+    let user_id = req.payload.id
+    // return (console.log('cek user_id', user_id))
+    // return (console.log('cek dataUser', dataUser.rows[0].id))
+      
+    if(user_id != dataUser.rows[0].id){
+        return res.status(404).json({ status: 404, message: 'This not your profile company!' })
+    }
+
+    const result = await putUserById(post);
+      if (result.rowCount > 0) {
+          console.log('ini hasil update', result.rows[0]);
+          return res.status(200).json({
+            status: 200,
+            message: 'Edit profile company success!',
+            data: result.rows[0],
+          });
+      } else {
+          console.log('Cant find data')
+          return res.status(404).json({ status: 404, message: 'Data company not found!' });
+      }
+    } catch (error) {
+        console.error('Error saat update data company', error);
+        return res.status(500).json({ status: 500, message: 'Error when update data company!'});
     }
   }
 };

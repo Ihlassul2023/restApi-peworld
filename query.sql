@@ -24,11 +24,15 @@ CREATE TABLE profile_company (
     email_hrd VARCHAR,
     email_corp VARCHAR,
     phone VARCHAR,
-    linkedin VARCHAR
+    linkedin VARCHAR,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES register_user(id)
 );
 
 
 --PROFILE WORKER--
+--NOTED FOREIGN KEY BLM DIBUAT--
+--foreign connect ke work experience dan porto--
 CREATE TABLE profile_worker (
     id SERIAL PRIMARY KEY,
     fullname VARCHAR,
@@ -36,7 +40,13 @@ CREATE TABLE profile_worker (
     address VARCHAR,
     office VARCHAR,
     description VARCHAR,
-    skill VARCHAR
+    skill VARCHAR,
+    user_id INT,
+    experience_id INT,
+    portofolio_id INT,
+    FOREIGN KEY (user_id) REFERENCES register_user(id)
+    FOREIGN KEY (experience_id) REFERENCES work_experience(id)
+    FOREIGN KEY (portofolio_id) REFERENCES portofolio(id)
 );
 
 
