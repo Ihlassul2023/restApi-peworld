@@ -90,6 +90,41 @@ const authController = {
         .json({ status: 500, message: 'Registration error!' });
     }
   },
+  login: async (req, res)=>{
+    try {
+      let {email, password} = req.body
+      console.log('input email and password', email, password)
+
+      if(!email || !password){
+          return res.status(404).json({ status: 404, message: 'Email and password must be filled!' })
+      }
+
+      let data = await validateByEmail(email)
+
+      if(!data.rows[0]){
+          return res.status(404).json({ status: 404, message: 'Email not registered!' })
+      }
+
+      let user = data.rows[0]
+      
+      const isPasswordMatch = await verifyPassword(password, user.password)
+      if(isPasswordMatch){
+        // delete user.password
+        // const token = generateToken(user)
+        // user.token = token
+        return res.status(200).json({
+          status: 200,
+          message: 'Login success!',
+          data: user,
+        })
+      } else {
+        return res.status(404).json({ status: 404, message: 'Input data is wrong!' })
+      }
+    } catch (error) {
+      console.error('error ketika login', error)
+      res.status(500).json({ status: 500, message: 'Login is failed!' })
+    }
+  }
 };
 
 module.exports = authController;
