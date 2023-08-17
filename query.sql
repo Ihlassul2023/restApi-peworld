@@ -9,6 +9,6 @@ CREATE TABLE register_user (
     password VARCHAR NOT NULL,
     photo VARCHAR,
     photo_id VARCHAR,
-    check VARCHAR,
+    validate VARCHAR,
     is_active BOOLEAN DEFAULT false
 );
