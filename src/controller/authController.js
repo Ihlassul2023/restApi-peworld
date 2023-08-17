@@ -26,12 +26,14 @@ const authController = {
   },
   registerUser: async (req, res) => {
     try {
-      const { name, email, phone, password, photo, photo_id } = req.body;
+      const { name, email, phone, company, position, password, photo, photo_id } = req.body;
 
       let post = {
         name: name,
         email: email,
         phone: phone,
+        company: company,
+        position: position,
         password: password,
         photo: photo,
         photo_id: photo_id,

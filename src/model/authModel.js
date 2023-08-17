@@ -16,8 +16,8 @@ const getRegisterUser = async () => {
 const postRegisterUser = async (post) => {
     return new Promise((resolve, reject)=>{
         console.log('Model: Post/register users')
-        const {name, email, phone, password, photo, photo_id} = post
-        pool.query(`INSERT INTO register_user (name, email, phone, password, photo, photo_id) VALUES ('${name}', '${email}', '${phone}','${password}', '${photo}', '${photo_id}') RETURNING *`, (err, results)=>{
+        const {name, email, phone, company, position, password, photo, photo_id, check} = post
+        pool.query(`INSERT INTO register_user (name, email, phone, password, photo, photo_id, check) VALUES ('${name}', '${email}', '${company}', '${position}', '${phone}','${password}', '${photo}', '${photo_id}, '${check}'') RETURNING *`, (err, results)=>{
             if(!err){
                 resolve(results)
             } else{
