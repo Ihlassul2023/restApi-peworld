@@ -1,17 +1,12 @@
+-- Active: 1689385551112@@127.0.0.1@5432@kelompok3
 --REGISTER USER--
-CREATE TABLE register_user (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    email VARCHAR NOT NULL,
-    phone VARCHAR,
-    password VARCHAR NOT NULL,
-    photo VARCHAR,
-    photo_id VARCHAR
-)
-
---LOGIN--
-CREATE TABLE login (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR NOT NULL,
-    password VARCHAR NOT NULL
-)
+CREATE TABLE experience (
+        id SERIAL PRIMARY KEY,
+        positon VARCHAR(200) NOT NULL,
+        company_name VARCHAR(200) NOT NULL,
+        fromMonth VARCHAR(255)NOT NULL,
+        toMonth VARCHAR(255) NOT NULL,
+        description VARCHAR(200) NOT NULL,
+    );
+ALTER TABLE experience ADD COLUMN user_id INT NOT NULL;
+ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
