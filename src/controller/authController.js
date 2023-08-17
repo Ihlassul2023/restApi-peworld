@@ -1,4 +1,4 @@
-import { postRegisterUser } from '../model/authModel';
+const {postRegisterUser} = require('../model/authModel')
 
 const authController = {
   registerUser: async (req, res) => {
