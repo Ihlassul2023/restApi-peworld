@@ -13,6 +13,19 @@ const getRegisterUser = async () => {
     })
 }
 
+const validateByEmail = async (email) => {
+    return new Promise((resolve,reject)=>{
+    console.log('Model: Get users by email', email)
+        pool.query(`SELECT * FROM register_user WHERE email = '${email}'`,(err,results)=>{
+            if(!err){
+                resolve(results)
+            } else{
+                reject(err)
+            }
+        })
+    })
+}
+
 const postRegisterUser = async (post) => {
     return new Promise((resolve, reject)=>{
         console.log('Model: Post/register users')
@@ -29,5 +42,6 @@ const postRegisterUser = async (post) => {
 
 module.exports = {
     getRegisterUser,
+    validateByEmail,
     postRegisterUser
 }

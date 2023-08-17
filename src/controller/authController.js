@@ -1,4 +1,8 @@
-const { getRegisterUser, postRegisterUser } = require('../model/authModel');
+const {
+  getRegisterUser,
+  validateByEmail,
+  postRegisterUser,
+} = require('../model/authModel');
 
 const authController = {
   getUser: async (req, res) => {
@@ -6,13 +10,11 @@ const authController = {
       const result = await getRegisterUser();
       if (result.rows.length > 0) {
         console.log('Hasil get user', result.rows);
-        return res
-          .status(200)
-          .json({
-            status: 200,
-            message: 'Get register user success!',
-            data: result.rows,
-          });
+        return res.status(200).json({
+          status: 200,
+          message: 'Get register user success!',
+          data: result.rows,
+        });
       } else {
         console.log('Data tidak ditemukan');
         return res
@@ -26,7 +28,26 @@ const authController = {
   },
   registerUser: async (req, res) => {
     try {
-      const { name, email, phone, company, position, password} = req.body;
+      const { name, email, phone, company, position, password } = req.body;
+
+      if (!name || !email || !phone || !password) {
+        return res
+          .status(404)
+          .json({
+            status: 404,
+            message: 'Name, email, phone, password must be filled!',
+          });
+      }
+
+      let user = await validateByEmail(email);
+      if (user.rows[0]) {
+        return res
+          .status(404)
+          .json({
+            status: 404,
+            message: 'Email has been registered, try another email!',
+          });
+      }
 
       let post = {
         name: name,
@@ -37,19 +58,17 @@ const authController = {
         password: password,
         photo: '',
         photo_id: '',
-        validate: ''
+        validate: '',
       };
 
       const result = await postRegisterUser(post);
       if (result) {
         console.log('Hasil register user', result.rows);
-        return res
-          .status(200)
-          .json({
-            status: 200,
-            message: 'Registration success!',
-            data: result.rows,
-          });
+        return res.status(200).json({
+          status: 200,
+          message: 'Registration success!',
+          data: result.rows,
+        });
       }
     } catch (error) {
       console.error('Error saat register user', error.message);
