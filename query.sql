@@ -46,7 +46,7 @@ CREATE TABLE profile_company (
 --foreign connect ke work experience dan porto--
 CREATE TABLE profile_worker (
     id SERIAL PRIMARY KEY,
-    fullname VARCHAR,
+    name VARCHAR,
     jobdesk VARCHAR,
     address VARCHAR,
     office VARCHAR,
@@ -56,16 +56,18 @@ CREATE TABLE profile_worker (
     portofolio_id INT,
     skill_id INT,
     FOREIGN KEY (user_id) REFERENCES register_worker(id)
-    FOREIGN KEY (experience_id) REFERENCES work_experience(id)
-    FOREIGN KEY (portofolio_id) REFERENCES portofolio(id)
-    FOREIGN KEY (skill_id) REFERENCES skill(id)
+    FOREIGN KEY (experience_id) REFERENCES work_experience(user_id)
+    FOREIGN KEY (portofolio_id) REFERENCES portofolio(user_id)
+    FOREIGN KEY (skill_id) REFERENCES skill(user_id)
 );
 
 
 --SKILL WORKER gabung ke profile worker--
 CREATE TABLE skill (
     id SERIAL PRIMARY KEY,
-    skills VARCHAR
+    skills VARCHAR,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES register_worker(id)
 );
 
 
@@ -78,6 +80,8 @@ CREATE TABLE work_experience (
     until VARCHAR,
     description VARCHAR,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES register_worker(id)
 );
 
 
@@ -90,6 +94,8 @@ CREATE TABLE portofolio (
     photo VARCHAR,
     photo_id VARCHAR,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES register_worker(id)
 );
 
 --MESSAGE MENU--

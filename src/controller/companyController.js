@@ -32,11 +32,11 @@ const {
         const {id} = req.params
         const result = await getCompanyById(id);
         if (result.rows.length > 0) {
-          console.log('Hasil company by id', result.rows);
+          console.log('Hasil get company by id', result.rows[0]);
           return res.status(200).json({
             status: 200,
             message: 'Get profile company success!',
-            data: result.rows,
+            data: result.rows[0],
           });
         } else {
           console.log('Data perusahaan tidak ditemukan');
@@ -123,11 +123,11 @@ const {
                 data: result.rows[0],
               });
           } else {
-              console.log('Data tidak ditemukan')
-              return res.status(404).json({ status: 404, message: 'Data not found!' });
+              console.log('Data company tidak ditemukan')
+              return res.status(404).json({ status: 404, message: 'Data company not found!' });
           }
         } catch (error) {
-            console.error(error);
+            console.error('Terjadi error ketika update profile company', error);
             return res.status(500).json({ status: 500, message: 'Update profile company failed!' });
         }
     }

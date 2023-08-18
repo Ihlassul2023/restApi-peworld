@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const authCompany = require('./src/router/authCompanyRouter')
 const authWorker = require('./src/router/authWorkerRouter')
-const company = require('./src/router//companyRouter')
+const company = require('./src/router/companyRouter')
+const worker = require('./src/router/workerRouter')
 
 
 app.use(express.json());
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 app.use(authCompany)
 app.use(authWorker)
 app.use(company)
+app.use(worker)
 
 app.listen(4000, ()=>{
     console.log(`App running on http://localhost:4000`)
