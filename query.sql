@@ -35,9 +35,6 @@ CREATE TABLE worker (
     address VARCHAR,
     office VARCHAR,
     description VARCHAR,
-    FOREIGN KEY (skill_id) REFERENCES skill(user_id),
-    FOREIGN KEY (experience_id) REFERENCES work_experience(user_id),
-    FOREIGN KEY (portofolio_id) REFERENCES portofolio(user_id)
 );
 
 --SKILL WORKER gabung ke profile worker--
@@ -50,21 +47,21 @@ CREATE TABLE skill (
 
 
 --WORK EXPERIENCE gabung ke profile worker--
-CREATE TABLE work_experience (
-    id SERIAL PRIMARY KEY,
-    position VARCHAR NOT NULL,
-    name VARCHAR NOT NULL,
-    since VARCHAR NOT NULL,
-    until VARCHAR NOT NULL,
-    description VARCHAR NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES worker(id)
-);
+-- CREATE TABLE work_experience (
+--     id SERIAL PRIMARY KEY,
+--     position VARCHAR NOT NULL,
+--     name VARCHAR NOT NULL,
+--     since VARCHAR NOT NULL,
+--     until VARCHAR NOT NULL,
+--     description VARCHAR NOT NULL,
+--     created_at TIMESTAMP NOT NULL DEFAULT NOW()
+--     user_id INT NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES worker(id)
+-- );
 
-ALTER TABLE work_experience ADD COLUMN user_id INT NOT NULL;
+-- ALTER TABLE work_experience ADD COLUMN user_id INT NOT NULL;
 
-ALTER TABLE work_experience ADD FOREIGN KEY (user_id) REFERENCES profile_worker(id) ON DELETE CASCADE;
+-- ALTER TABLE work_experience ADD FOREIGN KEY (user_id) REFERENCES profile_worker(id) ON DELETE CASCADE;
 
 --PORTOFOLIO gabung ke profile worker--
 CREATE TABLE portofolio (
@@ -84,15 +81,15 @@ CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
     message_detail VARCHAR
 );
-=======
--- CREATE TABLE experience (
---         id SERIAL PRIMARY KEY,
---         positon VARCHAR(200) NOT NULL,
---         company_name VARCHAR(200) NOT NULL,
---         fromMonth VARCHAR(255)NOT NULL,
---         toMonth VARCHAR(255) NOT NULL,
---         description VARCHAR(200) NOT NULL,
---     );
--- ALTER TABLE experience ADD COLUMN user_id INT NOT NULL;
--- ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES worker(id) ON DELETE CASCADE;
+
+CREATE TABLE experience (
+        id SERIAL PRIMARY KEY,
+        positon VARCHAR(200) NOT NULL,
+        company_name VARCHAR(200) NOT NULL,
+        fromMonth VARCHAR(255)NOT NULL,
+        toMonth VARCHAR(255) NOT NULL,
+        description VARCHAR(200) NOT NULL,
+        user_id INT NOT NULL,
+    );
+ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES worker(id) ON DELETE CASCADE;
 
