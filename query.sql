@@ -101,4 +101,12 @@ CREATE TABLE experience (
     );
 ALTER TABLE experience ADD COLUMN user_id INT NOT NULL;
 ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES profile_worker(id) ON DELETE CASCADE;
->>>>>>> fitur_lowongan
+
+CREATE TABLE portofolio (
+        id SERIAL PRIMARY KEY,
+        app_name VARCHAR(200) NOT NULL,
+        link_repo VARCHAR(200) NOT NULL,
+        type_porto VARCHAR(255)NOT NULL,
+       photo VARCHAR,
+    photo_id VARCHAR,
+    );
