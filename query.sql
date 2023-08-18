@@ -102,3 +102,11 @@ CREATE TABLE experience (
 ALTER TABLE experience ADD COLUMN user_id INT NOT NULL;
 ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 >>>>>>> fitur_lowongan
+
+
+CREATE TABLE
+    skill(
+        skill_name VARCHAR NOT NULL,
+        user_id INT,
+        FOREIGN KEY (user_id) REFERENCES register_user(id)
+    );
