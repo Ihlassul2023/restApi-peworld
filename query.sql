@@ -1,6 +1,6 @@
 -- Active: 1689385551112@@127.0.0.1@5432@kelompok3
 --REGISTER USER--
-<<<<<<< HEAD
+
 CREATE TABLE register_user (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -100,5 +100,5 @@ CREATE TABLE experience (
         description VARCHAR(200) NOT NULL,
     );
 ALTER TABLE experience ADD COLUMN user_id INT NOT NULL;
-ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES profile_worker(id) ON DELETE CASCADE;
 >>>>>>> fitur_lowongan
