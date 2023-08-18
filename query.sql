@@ -40,24 +40,25 @@ CREATE TABLE profile_worker (
     address VARCHAR,
     office VARCHAR,
     description VARCHAR,
-    skill VARCHAR,
     user_id INT,
     experience_id INT,
     portofolio_id INT,
-    FOREIGN KEY (user_id) REFERENCES register_user(id)
+    skill_id INT,
+    FOREIGN KEY (user_id) REFERENCES register_worker(id)
     FOREIGN KEY (experience_id) REFERENCES work_experience(id)
     FOREIGN KEY (portofolio_id) REFERENCES portofolio(id)
+    FOREIGN KEY (skill_id) REFERENCES skill(id)
 );
 
 
--- --SKILL WORKER gabung ke profile worker--
--- CREATE TABLE skills (
---     id SERIAL PRIMARY KEY,
-    
--- );
+--SKILL WORKER gabung ke profile worker--
+CREATE TABLE skill (
+    id SERIAL PRIMARY KEY,
+    skills VARCHAR
+);
 
 
---WORK EXPERIENCE--
+--WORK EXPERIENCE gabung ke profile worker--
 CREATE TABLE work_experience (
     id SERIAL PRIMARY KEY,
     position VARCHAR,
@@ -69,7 +70,7 @@ CREATE TABLE work_experience (
 );
 
 
---PORTOFOLIO--
+--PORTOFOLIO gabung ke profile worker--
 CREATE TABLE portofolio (
     id SERIAL PRIMARY KEY,
     name VARCHAR,
