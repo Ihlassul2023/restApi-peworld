@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const authCompany = require('./src/router/authCompanyRouter')
+const authWorker = require('./src/router/authWorkerRouter')
 const company = require('./src/router//companyRouter')
 
 
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(authCompany)
+app.use(authWorker)
 app.use(company)
 
 app.listen(4000, ()=>{

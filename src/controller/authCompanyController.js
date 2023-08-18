@@ -15,11 +15,11 @@ const authController = {
     try {
       const result = await getRegisterCompany();
       if (result.rows.length > 0) {
-        console.log('Hasil get company', result.rows);
+        console.log('Hasil get company', result.rows[0]);
         return res.status(200).json({
           status: 200,
           message: 'Get register company success!',
-          data: result.rows,
+          data: result.rows[0],
         });
       } else {
         console.log('Data perusahaan tidak ditemukan');

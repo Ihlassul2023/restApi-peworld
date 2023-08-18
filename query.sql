@@ -12,6 +12,17 @@ CREATE TABLE register_company (
     validate VARCHAR,
     is_active BOOLEAN DEFAULT false
 );
+CREATE TABLE register_worker (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    photo VARCHAR,
+    photo_id VARCHAR,
+    validate VARCHAR,
+    is_active BOOLEAN DEFAULT false
+);
 
 --PROFILE COMPANY--
 CREATE TABLE profile_company (
