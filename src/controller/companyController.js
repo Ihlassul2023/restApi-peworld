@@ -1,136 +1,206 @@
 const {
-    getProfileCompany,
-    getCompanyById,
-    postProfileCompany,
-    putCompanyById
-  } = require('../model/companyModel');
-  
-  const companyController = {
-    getProfile: async (req, res) => {
-      try {
-        const result = await getProfileCompany();
-        if (result.rows.length > 0) {
-          console.log('Hasil get profile company', result.rows);
-          return res.status(200).json({
-            status: 200,
-            message: 'Get profile company success!',
-            data: result.rows,
-          });
-        } else {
-          console.log('Data perusahaan tidak ditemukan');
-          return res
-            .status(404)
-            .json({ status: 404, message: 'Data company not found!' });
-        }
-      } catch (error) {
-        console.error('Error saat get company:', error.message);
-        return res.status(500).json({ status: 500, message: 'Get company error!' });
-      }
-    },
-    getCompanyId: async (req, res) => {
-      try {
-        const {id} = req.params
-        const result = await getCompanyById(id);
-        if (result.rows.length > 0) {
-          console.log('Hasil get company by id', result.rows[0]);
-          return res.status(200).json({
-            status: 200,
-            message: 'Get profile company success!',
-            data: result.rows[0],
-          });
-        } else {
-          console.log('Data perusahaan tidak ditemukan');
-          return res
-            .status(404)
-            .json({ status: 404, message: 'Data company not found!' });
-        }
-      } catch (error) {
-        console.error('Error saat get company:', error.message);
-        return res.status(500).json({ status: 500, message: 'Get company error!' });
-      }
-    },
-    postProfile: async (req, res) => {
-      try {
-        const { name, sector, province, city, description, email_hrd, email_corp, phone, linkedin } = req.body;
+  getRegisterCompany,
+  getCompanyById,
+  checkEmailCompany,
+  postRegisterCompany,
+  putCompanyById
+} = require('../model/companyModel');
 
-        let user_id =  req.payload.id
-        // return(console.log('decode',user_id))
+const {hashPassword, verifyPassword} = require('../middleware/bcrypt')
+const cloudinary = require('../config/cloudinary');
+const {generateToken} = require('../middleware/jwt')
 
-        let post = {
-          name: name,
-          sector: sector,
-          province: province,
-          city: city,
-          description: description,
-          email_hrd: email_hrd,
-          email_corp: email_corp,
-          phone: phone,
-          linkedin: linkedin,
-          user_id
-        };
-  
-        const result = await postProfileCompany(post);
-        if (result) {
-          console.log('Hasil post', result.rows);
-          return res.status(200).json({
-            status: 200,
-            message: 'Post profile company success!',
-            data: result.rows[0],
-          });
-        }
-      } catch (error) {
-        console.error('Error saat post profile company', error.message);
+const authController = {
+  getCompany: async (req, res) => {
+    try {
+      const result = await getRegisterCompany();
+      if (result.rows.length > 0) {
+        console.log('Hasil get company', result.rows);
+        return res.status(200).json({
+          status: 200,
+          message: 'Get register company success!',
+          data: result.rows,
+        });
+      } else {
+        console.log('Data perusahaan tidak ditemukan');
         return res
-          .status(500)
-          .json({ status: 500, message: 'Post profile company error!' });
+          .status(404)
+          .json({ status: 404, message: 'Data register company not found!' });
       }
-    },
-    updateProfile: async (req, res) => {
-        console.log('Control: Running update profile company')
-        try {
-        const {id} = req.params
-        const {name, sector, province, city, description, email_hrd, email_corp, phone, linkedin} = req.body
-
-        let dataCompany = await getCompanyById(id)
-
-        let post = {
-          id: id,
-          name: name || dataCompany.rows[0].name,
-          sector: sector || dataCompany.rows[0].sector,
-          province: province || dataCompany.rows[0].province,
-          city: city || dataCompany.rows[0].city,
-          description: description || dataCompany.rows[0].description,
-          email_hrd: email_hrd || dataCompany.rows[0].email_hrd,
-          email_corp: email_corp || dataCompany.rows[0].email_corp,
-          phone: phone || dataCompany.rows[0].phone,
-          linkedin:linkedin || dataCompany.rows[0].linkedin
-        }
-
-        let user_id =  req.payload.id
-
-        // return (console.log('Update check', company_id))
-
-        if(user_id != dataCompany.rows[0].user_id){
-            return res.status(404).json({ status: 404, message: 'This is not your profile!' })
-        }
-
-        const result = await putCompanyById(post);
-          if (result.rowCount > 0) {
-              console.log(result.rows);
-              return res.status(200).json({
-                status: 200,
-                message: 'Update profile company success!',
-                data: result.rows[0],
-              });
-          } else {
-              console.log('Data company tidak ditemukan')
-              return res.status(404).json({ status: 404, message: 'Data company not found!' });
-          }
-        } catch (error) {
-            console.error('Terjadi error ketika update profile company', error);
-            return res.status(500).json({ status: 500, message: 'Update profile company failed!' });
-        }
+    } catch (error) {
+      console.error('Error saat get company:', error.message);
+      return res.status(500).json({ status: 500, message: 'Get data company error!' });
     }
-  };
-  
-  module.exports = companyController;  
+  },
+  registerCompany: async (req, res) => {
+    try {
+      const {name, email, phone, company_name, position, password, sector, province, city, description, email_hrd, email_corp, linkedin} = req.body
+
+      if (!name || !email || !phone || !password) {
+        return res
+          .status(404)
+          .json({
+            status: 404,
+            message: 'Name, email, phone, password must be filled!',
+          });
+      }
+
+      let user = await checkEmailCompany(email);
+      if (user.rows[0]) {
+        return res
+          .status(404)
+          .json({
+            status: 404,
+            message: 'Email has been registered, try another email!',
+          });
+      }
+
+      let post = {
+        name: name,
+        email: email,
+        phone: phone,
+        company_name: company_name,
+        position: position,
+        password: await hashPassword(password),
+        validate: 'diisi token validasi nanti',
+        sector: sector,
+        province: province,
+        city: city,
+        description: description,
+        email_hrd: email_hrd,
+        email_corp: email_corp,
+        linkedin: linkedin
+      };
+
+      if (req.file) {
+        const result_up = await cloudinary.uploader.upload(req.file.path, { folder: 'HireJob' });
+        console.log('Ini adalah hasil cloudinary company', result_up);
+
+        post.photo = result_up.secure_url;
+        post.photo_id = result_up.public_id;
+      } else {
+        post.photo = 'https://i.ibb.co/M2JSRmW/noimage.png';
+        post.photo_id = 'no_image';
+      }
+
+
+      const result = await postRegisterCompany(post);
+      if (result) {
+        console.log('Hasil register perusahaan', result.rows);
+        return res.status(200).json({
+          status: 200,
+          message: 'Registration company success!',
+          data: result.rows[0],
+        });
+      }
+    } catch (error) {
+      console.error('Error saat register perusahaan', error.message);
+      return res
+        .status(500)
+        .json({ status: 500, message: 'Registration company error!' });
+    }
+  },
+  loginCompany: async (req, res)=>{
+    try {
+      let {email, password} = req.body
+      console.log('input email and password', email, password)
+
+      if(!email || !password){
+          return res.status(404).json({ status: 404, message: 'Email and password must be filled!' })
+      }
+
+      let data = await checkEmailCompany(email)
+
+      if(!data.rows[0]){
+          return res.status(404).json({ status: 404, message: 'Email not registered!' })
+      }
+
+      let user = data.rows[0]
+      
+      const isPasswordMatch = await verifyPassword(password, user.password)
+      if(isPasswordMatch){
+        delete user.password
+        const token = generateToken(user)
+        user.token = token
+        return res.status(200).json({
+          status: 200,
+          message: 'Login success!',
+          data: user,
+        })
+      } else {
+        return res.status(404).json({ status: 404, message: 'Input data is wrong!' })
+      }
+    } catch (error) {
+      console.error('error ketika login', error)
+      res.status(500).json({ status: 500, message: 'Login is failed!' })
+    }
+  },
+  editCompany: async (req, res) => {
+    try {
+    const {id} = req.params
+    const {name, email, phone, company_name, position, password, sector, province, city, description, email_hrd, email_corp, linkedin} = req.body
+
+    let dataUser = await getCompanyById(id);
+    let result_up = null;
+
+    if (req.file) {
+        // Jika req.file ada, upload gambar baru dan delete gambar lama
+        result_up = await cloudinary.uploader.upload(req.file.path, { folder: 'HireJob' });
+        await cloudinary.uploader.destroy(dataUser.rows[0].photo_id);
+    }
+
+    let post = {
+      id: id,
+      name: name || dataUser.rows[0].name,
+      email: email || dataUser.rows[0].email,
+      phone: phone || dataUser.rows[0].phone,
+      company_name: company_name || dataUser.rows[0].company_name,
+      position: position || dataUser.rows[0].position,
+      password: await hashPassword(password) || dataUser.rows[0].password,
+      sector: sector || dataUser.rows[0].sector,
+      province: province || dataUser.rows[0].province,
+      city: city || dataUser.rows[0].city,
+      description: description || dataUser.rows[0].description,
+      email_hrd: email_hrd || dataUser.rows[0].email_hrd,
+      email_corp: email_corp || dataUser.rows[0].email_corp,
+      linkedin: linkedin || dataUser.rows[0].linkedin
+    }
+
+    if (result_up) {
+      // Jika gambar baru diupload, update properti image
+        post.photo = result_up.secure_url;
+        post.photo_id = result_up.public_id;
+    } else {
+        // Jika tidak ada gambar baru diupload, ambil gambar yang masih ada
+        post.photo = dataUser.rows[0].photo;
+        post.photo_id = dataUser.rows[0].photo_id;
+    }
+
+    let user_id = req.payload.id
+    // return (console.log('cek user_id', user_id))
+    // return (console.log('cek dataUser', dataUser.rows[0].id))
+      
+    if(user_id != dataUser.rows[0].id){
+        return res.status(404).json({ status: 404, message: 'This not your profile company!' })
+    }
+
+    const result = await putCompanyById(post);
+      if (result.rowCount > 0) {
+          console.log('ini hasil update', result.rows[0]);
+          return res.status(200).json({
+            status: 200,
+            message: 'Edit profile company success!',
+            data: result.rows[0],
+          });
+      } else {
+          console.log('Cant find data')
+          return res.status(404).json({ status: 404, message: 'Data company not found!' });
+      }
+    } catch (error) {
+        console.error('Error saat update data company', error);
+        return res.status(500).json({ status: 500, message: 'Error when update data company!'});
+    }
+  }
+};
+
+module.exports = authController;

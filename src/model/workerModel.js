@@ -1,21 +1,9 @@
 const pool = require('../config/db')
 
-const getProfileWorker = async () => {
+const getRegisterWorker = async () => {
     return new Promise((resolve,reject)=>{
-    console.log('Model: Get profile worker')
-        pool.query(`SELECT * FROM profile_worker`,(err,results)=>{
-            if(!err){
-                resolve(results)
-            } else{
-                reject(err)
-            }
-        })
-    })
-}
-const getWorkerById = async (id) => {
-    return new Promise((resolve,reject)=>{
-    console.log('Model: Get profile worker by id')
-        pool.query(`SELECT * FROM profile_worker WHERE id = ${id}`,(err,results)=>{
+    console.log('Model: Get register worker')
+        pool.query(`SELECT * FROM worker`,(err,results)=>{
             if(!err){
                 resolve(results)
             } else{
@@ -25,11 +13,37 @@ const getWorkerById = async (id) => {
     })
 }
 
-const postProfileWorker = async (post) => {
+const getWorkerById = async (id) => {
+    return new Promise((resolve,reject)=>{
+    console.log('Model: Get data worker by id')
+        pool.query(`SELECT * FROM worker WHERE id = ${id}`,(err,results)=>{
+            if(!err){
+                resolve(results)
+            } else{
+                reject(err)
+            }
+        })
+    })
+}
+
+const checkEmailWorker = async (email) => {
+    return new Promise((resolve,reject)=>{
+    console.log('Model: Get data worker by email', email)
+        pool.query(`SELECT * FROM worker WHERE email = '${email}'`,(err,results)=>{
+            if(!err){
+                resolve(results)
+            } else{
+                reject(err)
+            }
+        })
+    })
+}
+
+const postRegisterWorker = async (post) => {
     return new Promise((resolve, reject)=>{
         console.log('Model: Post/register worker')
-        const {name, jobdesk, address, office, description, user_id, experience_id, portofolio_id, skill_id} = post
-        pool.query(`INSERT INTO profile_worker (name, jobdesk, address, office, description, user_id, experience_id, portofolio_id, skill_id) VALUES ('${name}', '${jobdesk}', '${address}', '${office}', '${description}', ${user_id}, ${experience_id}, ${portofolio_id}, ${skill_id}') RETURNING *`, (err, results)=>{
+        const {name, email, phone, password, photo, photo_id, validate, jobdesk, address, office, description} = post
+        pool.query(`INSERT INTO worker (name, email, phone, company, position, password, photo, photo_id, validate, jobdesk, address, office, description) VALUES ('${name}', '${email}', '${phone}', '${password}', '${photo}', '${photo_id}', '${validate}', '${jobdesk}', '${address}', '${office}', '${description}') RETURNING *`, (err, results)=>{
             if(!err){
                 resolve(results)
             } else{
@@ -41,10 +55,10 @@ const postProfileWorker = async (post) => {
 
 const putWorkerById = async (post) => {
     return new Promise((resolve, reject) => {
-      console.log('Model: update profile company');
-      const {name, jobdesk, address, office, description, id} = post
+      console.log('Model: update data company');
+      const {name, email, phone, password, photo, photo_id, jobdesk, address, office, description, id} = post
       pool.query(
-        `UPDATE profile_company SET name = '${name}', jobdesk = '${jobdesk}', address = '${address}', office = '${office}', description = '${description}' WHERE id = ${id} RETURNING *`,
+        `UPDATE worker SET name = '${name}', email = '${email}', phone = '${phone}', password = '${password}', photo = '${photo}', photo_id = '${photo_id}', jobdesk = '${jobdesk}', address = '${address}', office = '${office}', description = '${description}' WHERE id = ${id} RETURNING *`,
         (err, results) => {
           if (!err) {
             resolve(results);
@@ -58,8 +72,9 @@ const putWorkerById = async (post) => {
 
 
 module.exports = {
-    getProfileWorker,
+    getRegisterWorker,
     getWorkerById,
-    postProfileWorker,
+    checkEmailWorker,
+    postRegisterWorker,
     putWorkerById
 }

@@ -1,12 +1,12 @@
-const {getProfile, postProfile, updateProfile, getWorkerId} = require('../controller/workerController')
+const {registerWorker, getWorker, loginWorker, editWorker} = require('../controller/workerController')
 const app = require('express')
 const router = app.Router()
 const upload = require('../middleware/multer')
-const { protect } = require('../middleware/jwt')
+const {protect} = require('../middleware/jwt')
 
-router.get('/worker', getProfile)
-router.get('/worker/:id', getWorkerId)
-router.post('/worker', protect, postProfile)
-router.put('/worker/:id', protect, updateProfile)
+router.get('/list-worker', protect, getWorker)
+router.post('/register-worker', upload.single('photo'), registerWorker)
+router.post('/login-worker', loginWorker)
+router.put('/update-worker/:id', protect, upload.single('photo'), editWorker)
 
 module.exports = router
