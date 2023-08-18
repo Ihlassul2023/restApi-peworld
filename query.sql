@@ -1,3 +1,50 @@
+-- tabel untuk perekrut
+CREATE TABLE recruiter (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    company_name VARCHAR NOT NULL,
+    position VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    photo VARCHAR,
+    photo_id VARCHAR,
+    validate VARCHAR,
+    is_active BOOLEAN DEFAULT false
+    sector VARCHAR,
+    province VARCHAR,
+    city VARCHAR,
+    description VARCHAR,
+    email_hrd VARCHAR,
+    email_corp VARCHAR,
+    linkedin VARCHAR,
+);
+
+-- tabel untuk pekerja
+CREATE TABLE worker (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    photo VARCHAR,
+    photo_id VARCHAR,
+    validate VARCHAR,
+    is_active BOOLEAN DEFAULT false,
+    jobdesk VARCHAR,
+    address VARCHAR,
+    office VARCHAR,
+    description VARCHAR,
+);
+
+
+
+
+
+
+
+
+
 --REGISTER USER--
 CREATE TABLE register_company (
     id SERIAL PRIMARY KEY,
