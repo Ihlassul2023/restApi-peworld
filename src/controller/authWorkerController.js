@@ -15,11 +15,11 @@ const {
       try {
         const result = await getRegisterWorker();
         if (result.rows.length > 0) {
-          console.log('Hasil get worker', result.rows[0]);
+          console.log('Hasil get worker', result.rows);
           return res.status(200).json({
             status: 200,
             message: 'Get register worker success!',
-            data: result.rows[0],
+            data: result.rows,
           });
         } else {
           console.log('Data pekerja tidak ditemukan');

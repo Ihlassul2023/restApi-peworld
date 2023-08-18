@@ -29,7 +29,7 @@ const postProfileCompany = async (post) => {
     return new Promise((resolve, reject)=>{
         console.log('Model: Post/register users')
         const {name, sector, province, city, description, email_hrd, email_corp, phone, linkedin, user_id} = post
-        pool.query(`INSERT INTO profile_company (name, sector, province, city, description, email_hrd, email_corp, phone, linkedin, user_id) VALUES ('${name}', '${sector}', '${province}', '${city}', '${description}', '${email_hrd}', '${email_corp}', '${phone}', '${linkedin}', '${user_id}') RETURNING *`, (err, results)=>{
+        pool.query(`INSERT INTO profile_company (name, sector, province, city, description, email_hrd, email_corp, phone, linkedin, user_id) VALUES ('${name}', '${sector}', '${province}', '${city}', '${description}', '${email_hrd}', '${email_corp}', '${phone}', '${linkedin}', ${user_id}) RETURNING *`, (err, results)=>{
             if(!err){
                 resolve(results)
             } else{
