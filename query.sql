@@ -109,4 +109,5 @@ CREATE TABLE portofolio (
         type_porto VARCHAR(255)NOT NULL,
        photo VARCHAR,
     photo_id VARCHAR,
+    FOREIGN KEY (user_id) REFERENCES register_user(id)
     );
