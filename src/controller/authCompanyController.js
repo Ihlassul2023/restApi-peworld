@@ -1,38 +1,38 @@
 const {
-  getRegisterUser,
-  getUserById,
-  validateByEmail,
-  postRegisterUser,
-  putUserById
-} = require('../model/authModel');
+  getRegisterCompany,
+  getCompanyById,
+  validateEmailCompany,
+  postRegisterCompany,
+  putCompanyById
+} = require('../model/authCompanyModel');
 
 const {hashPassword, verifyPassword} = require('../middleware/bcrypt')
 const cloudinary = require('../config/cloudinary');
 const {generateToken} = require('../middleware/jwt')
 
 const authController = {
-  getUser: async (req, res) => {
+  getCompany: async (req, res) => {
     try {
-      const result = await getRegisterUser();
+      const result = await getRegisterCompany();
       if (result.rows.length > 0) {
-        console.log('Hasil get user', result.rows);
+        console.log('Hasil get company', result.rows);
         return res.status(200).json({
           status: 200,
-          message: 'Get register user success!',
+          message: 'Get register company success!',
           data: result.rows,
         });
       } else {
-        console.log('Data tidak ditemukan');
+        console.log('Data perusahaan tidak ditemukan');
         return res
           .status(404)
-          .json({ status: 404, message: 'Data register user not found!' });
+          .json({ status: 404, message: 'Data register company not found!' });
       }
     } catch (error) {
-      console.error('Error saat get user:', error.message);
-      return res.status(500).json({ status: 500, message: 'Get user error!' });
+      console.error('Error saat get company:', error.message);
+      return res.status(500).json({ status: 500, message: 'Get data company error!' });
     }
   },
-  registerUser: async (req, res) => {
+  registerCompany: async (req, res) => {
     try {
       const { name, email, phone, company, position, password } = req.body;
 
@@ -45,7 +45,7 @@ const authController = {
           });
       }
 
-      let user = await validateByEmail(email);
+      let user = await validateEmailCompany(email);
       if (user.rows[0]) {
         return res
           .status(404)
@@ -67,7 +67,7 @@ const authController = {
 
       if (req.file) {
         const result_up = await cloudinary.uploader.upload(req.file.path, { folder: 'HireJob' });
-        console.log('Ini adalah hasil cloudinary', result_up);
+        console.log('Ini adalah hasil cloudinary company', result_up);
 
         post.photo = result_up.secure_url;
         post.photo_id = result_up.public_id;
@@ -77,23 +77,23 @@ const authController = {
       }
 
 
-      const result = await postRegisterUser(post);
+      const result = await postRegisterCompany(post);
       if (result) {
-        console.log('Hasil register user', result.rows);
+        console.log('Hasil register perusahaan', result.rows);
         return res.status(200).json({
           status: 200,
-          message: 'Registration success!',
+          message: 'Registration company success!',
           data: result.rows[0],
         });
       }
     } catch (error) {
-      console.error('Error saat register user', error.message);
+      console.error('Error saat register perusahaan', error.message);
       return res
         .status(500)
-        .json({ status: 500, message: 'Registration error!' });
+        .json({ status: 500, message: 'Registration company error!' });
     }
   },
-  login: async (req, res)=>{
+  loginCompany: async (req, res)=>{
     try {
       let {email, password} = req.body
       console.log('input email and password', email, password)
@@ -102,7 +102,7 @@ const authController = {
           return res.status(404).json({ status: 404, message: 'Email and password must be filled!' })
       }
 
-      let data = await validateByEmail(email)
+      let data = await validateEmailCompany(email)
 
       if(!data.rows[0]){
           return res.status(404).json({ status: 404, message: 'Email not registered!' })
@@ -128,12 +128,12 @@ const authController = {
       res.status(500).json({ status: 500, message: 'Login is failed!' })
     }
   },
-  editUser: async (req, res) => {
+  editCompany: async (req, res) => {
     try {
     const {id} = req.params
     const {name, email, phone, company, position, password} = req.body
 
-    let dataUser = await getUserById(id);
+    let dataUser = await getCompanyById(id);
     let result_up = null;
 
     if (req.file) {
@@ -144,12 +144,12 @@ const authController = {
 
     let post = {
       id: id,
-      name: name,
-      email: email,
-      phone: phone,
-      company: company,
-      position: position,
-      password: await hashPassword(password)
+      name: name || dataUser.rows[0].name,
+      email: email || dataUser.rows[0].email,
+      phone: phone || dataUser.rows[0].phone,
+      company: company || dataUser.rows[0].company,
+      position: position || dataUser.rows[0].position,
+      password: await hashPassword(password) || dataUser.rows[0].password
     }
 
     if (result_up) {
@@ -170,7 +170,7 @@ const authController = {
         return res.status(404).json({ status: 404, message: 'This not your profile company!' })
     }
 
-    const result = await putUserById(post);
+    const result = await putCompanyById(post);
       if (result.rowCount > 0) {
           console.log('ini hasil update', result.rows[0]);
           return res.status(200).json({

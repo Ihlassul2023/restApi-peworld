@@ -91,25 +91,26 @@ const {
         const {id} = req.params
         const {name, sector, province, city, description, email_hrd, email_corp, phone, linkedin} = req.body
 
+        let dataCompany = await getCompanyById(id)
+
         let post = {
           id: id,
-          name: name,
-          sector: sector,
-          province: province,
-          city: city,
-          description: description,
-          email_hrd: email_hrd,
-          email_corp: email_corp,
-          phone: phone,
-          linkedin:linkedin
+          name: name || dataCompany.rows[0].name,
+          sector: sector || dataCompany.rows[0].sector,
+          province: province || dataCompany.rows[0].province,
+          city: city || dataCompany.rows[0].city,
+          description: description || dataCompany.rows[0].description,
+          email_hrd: email_hrd || dataCompany.rows[0].email_hrd,
+          email_corp: email_corp || dataCompany.rows[0].email_corp,
+          phone: phone || dataCompany.rows[0].phone,
+          linkedin:linkedin || dataCompany.rows[0].linkedin
         }
 
         let user_id =  req.payload.id
-        let company_id = await getCompanyById(id)
 
         // return (console.log('Update check', company_id))
 
-        if(user_id != company_id.rows[0].user_id){
+        if(user_id != dataCompany.rows[0].user_id){
             return res.status(404).json({ status: 404, message: 'This is not your profile!' })
         }
 

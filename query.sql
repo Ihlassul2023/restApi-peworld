@@ -1,5 +1,5 @@
 --REGISTER USER--
-CREATE TABLE register_user (
+CREATE TABLE register_company (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
     email VARCHAR NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE profile_company (
     phone VARCHAR,
     linkedin VARCHAR,
     user_id INT,
-    FOREIGN KEY (user_id) REFERENCES register_user(id)
+    FOREIGN KEY (user_id) REFERENCES register_company(id)
 );
 
 
