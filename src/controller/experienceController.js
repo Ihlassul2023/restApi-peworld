@@ -1,12 +1,12 @@
 const { getMyWorkExperience, getWorkExperienceById, postWorkExperience, putWorkExperience, deleteWorkExperienceById } = require("../model/experienceModel");
 const { StatusCodes } = require("http-status-codes");
 const getMyWE = async (req, res) => {
-  const { id } = req.user;
+  const { id } = req.payload;
   const dataWE = await getMyWorkExperience(id);
   if (dataWE.rows.length != 0) {
-    res.status(StatusCodes.OK).json({ msg: "success", data: dataWE.rows });
+    res.status(StatusCodes.OK).json({ message: "success", data: dataWE.rows });
   } else {
-    return res.status(404).json({ msg: "data tidak ada!" });
+    return res.status(404).json({ message: "data not found!" });
   }
 };
 const getWEById = async (req, res) => {
@@ -15,11 +15,11 @@ const getWEById = async (req, res) => {
   if (dataWE.rows[0]) {
     res.status(StatusCodes.OK).json({ msg: "success", data: dataWE.rows[0] });
   } else {
-    return res.status(404).json({ msg: "data tidak ada!" });
+    return res.status(404).json({ msg: "data not found!" });
   }
 };
 const postWE = async (req, res) => {
-  req.body.user_id = req.user.id;
+  req.body.user_id = req.payload.id;
   await postWorkExperience(req.body);
   return res.status(StatusCodes.CREATED).json({ msg: "success" });
 };

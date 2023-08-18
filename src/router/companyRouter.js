@@ -1,12 +1,12 @@
-const {getProfile, postProfile, updateProfile, getCompanyId} = require('../controller/companyController')
+const {registerCompany, getCompany, loginCompany, editCompany} = require('../controller/companyController')
 const app = require('express')
 const router = app.Router()
 const upload = require('../middleware/multer')
-const { protect } = require('../middleware/jwt')
+const {protect} = require('../middleware/jwt')
 
-router.get('/company', getProfile)
-router.get('/company/:id', getCompanyId)
-router.post('/company', protect, postProfile)
-router.put('/company/:id', protect, updateProfile)
+router.get('/list-company', protect, getCompany)
+router.post('/register-company', upload.single('photo'), registerCompany)
+router.post('/login-company', loginCompany)
+router.put('/update-company/:id', protect, upload.single('photo'), editCompany)
 
 module.exports = router
