@@ -1,32 +1,52 @@
-const { getRegisterCompany, getCompanyById, checkEmailCompany, postRegisterCompany, putCompanyById } = require("../model/companyModel");
+const { getRegisterWorker, getWorkerById, checkEmailWorker, postRegisterWorker, putWorkerById } = require("../model/workerModel");
 
 const { hashPassword, verifyPassword } = require("../middleware/bcrypt");
 const cloudinary = require("../config/cloudinary");
 const { generateToken } = require("../middleware/jwt");
 
 const authController = {
-  getCompany: async (req, res) => {
+  getWorker: async (req, res) => {
     try {
-      const result = await getRegisterCompany();
+      const result = await getRegisterWorker();
       if (result.rows.length > 0) {
-        console.log("Hasil get company", result.rows);
+        console.log("Hasil get worker", result.rows);
         return res.status(200).json({
           status: 200,
-          message: "Get register company success!",
+          message: "Get register worker success!",
           data: result.rows,
         });
       } else {
-        console.log("Data perusahaan tidak ditemukan");
-        return res.status(404).json({ status: 404, message: "Data register company not found!" });
+        console.log("Data pekerja tidak ditemukan");
+        return res.status(404).json({ status: 404, message: "Data register worker not found!" });
       }
     } catch (error) {
-      console.error("Error saat get company:", error.message);
-      return res.status(500).json({ status: 500, message: "Get data company error!" });
+      console.error("Error saat get worker:", error.message);
+      return res.status(500).json({ status: 500, message: "Get data worker error!" });
     }
   },
-  registerCompany: async (req, res) => {
+  getProfileWorker: async (req, res) => {
     try {
-      const { name, email, phone, company_name, position, password, confirm_password } = req.body;
+      const { id } = req.payload;
+      const result = await getWorkerById(id);
+      if (result.rows.length > 0) {
+        console.log("Hasil get worker", result.rows);
+        return res.status(200).json({
+          status: 200,
+          message: "Get register worker success!",
+          data: result.rows,
+        });
+      } else {
+        console.log("Data pekerja tidak ditemukan");
+        return res.status(404).json({ status: 404, message: "Data register worker not found!" });
+      }
+    } catch (error) {
+      console.error("Error saat get worker:", error.message);
+      return res.status(500).json({ status: 500, message: "Get data worker error!" });
+    }
+  },
+  registerWorker: async (req, res) => {
+    try {
+      const { name, email, phone, password, confirm_password } = req.body;
 
       if (!name || !email || !phone || !password || !confirm_password) {
         return res.status(404).json({
@@ -37,7 +57,7 @@ const authController = {
         return res.status(404).json({ message: "Password and confirmation password do not match." });
       }
 
-      let user = await checkEmailCompany(email);
+      let user = await checkEmailWorker(email);
       if (user.rows[0]) {
         return res.status(404).json({
           status: 404,
@@ -46,18 +66,16 @@ const authController = {
       }
 
       let post = {
-        name,
-        email,
-        phone,
-        company_name,
-        position,
+        name: name,
+        email: email,
+        phone: phone,
         password: await hashPassword(password),
-        validate: "diisi token validasi nanti",
+        validate: "ini untuk token aktivasi",
       };
 
       if (req.file) {
         const result_up = await cloudinary.uploader.upload(req.file.path, { folder: "HireJob" });
-        console.log("Ini adalah hasil cloudinary company", result_up);
+        console.log("Ini adalah hasil cloudinary worker", result_up);
 
         post.photo = result_up.secure_url;
         post.photo_id = result_up.public_id;
@@ -66,21 +84,21 @@ const authController = {
         post.photo_id = "no_image";
       }
 
-      const result = await postRegisterCompany(post);
+      const result = await postRegisterWorker(post);
       if (result) {
-        console.log("Hasil register perusahaan", result.rows);
+        console.log("Hasil register pekerja", result.rows);
         return res.status(200).json({
           status: 200,
-          message: "Registration company success!",
+          message: "Registration worker success!",
           data: result.rows[0],
         });
       }
     } catch (error) {
-      console.error("Error saat register perusahaan", error.message);
-      return res.status(500).json({ status: 500, message: "Registration company error!" });
+      console.error("Error saat register pekerja", error.message);
+      return res.status(500).json({ status: 500, message: "Registration worker error!" });
     }
   },
-  loginCompany: async (req, res) => {
+  loginWorker: async (req, res) => {
     try {
       let { email, password } = req.body;
       console.log("input email and password", email, password);
@@ -89,7 +107,7 @@ const authController = {
         return res.status(404).json({ status: 404, message: "Email and password must be filled!" });
       }
 
-      let data = await checkEmailCompany(email);
+      let data = await checkEmailWorker(email);
 
       if (!data.rows[0]) {
         return res.status(404).json({ status: 404, message: "Email not registered!" });
@@ -115,18 +133,17 @@ const authController = {
       res.status(500).json({ status: 500, message: "Login is failed!" });
     }
   },
-  editCompany: async (req, res) => {
+  editWorker: async (req, res) => {
     try {
-      const { id } = req.params;
-      const { name, email, phone, company_name, position, password, sector, province, city, description, email_hrd, email_corp, linkedin } = req.body;
+      const { name, email, phone, password, jobdesk, address, office, description } = req.body;
 
-      let dataUser = await getCompanyById(id);
       let user_id = req.payload.id;
+      let dataUser = await getWorkerById(user_id);
       // return (console.log('cek user_id', user_id))
       // return (console.log('cek dataUser', dataUser.rows[0].id))
 
       if (user_id != dataUser.rows[0].id) {
-        return res.status(404).json({ status: 404, message: "This not your profile company!" });
+        return res.status(404).json({ status: 404, message: "This not your profile worker!" });
       }
       let result_up = null;
 
@@ -137,20 +154,15 @@ const authController = {
       }
 
       let post = {
-        id: id,
+        id: user_id,
         name: name || dataUser.rows[0].name,
         email: email || dataUser.rows[0].email,
         phone: phone || dataUser.rows[0].phone,
-        company_name: company_name || dataUser.rows[0].company_name,
-        position: position || dataUser.rows[0].position,
         password: (await hashPassword(password)) || dataUser.rows[0].password,
-        sector: sector || dataUser?.rows[0].sector || "",
-        province: province || dataUser?.rows[0].province || "",
-        city: city || dataUser?.rows[0].city || "",
-        description: description || dataUser?.rows[0].description || "",
-        email_hrd: email_hrd || dataUser?.rows[0].email_hrd || "",
-        email_corp: email_corp || dataUser?.rows[0].email_corp || "",
-        linkedin: linkedin || dataUser?.rows[0].linkedin || "",
+        jobdesk: jobdesk || dataUser.rows[0].jobdesk,
+        address: address || dataUser.rows[0].address,
+        office: office || dataUser.rows[0].office,
+        description: description || dataUser.rows[0].description,
       };
 
       if (result_up) {
@@ -159,25 +171,37 @@ const authController = {
         post.photo_id = result_up.public_id;
       } else {
         // Jika tidak ada gambar baru diupload, ambil gambar yang masih ada
-        post.photo = dataUser?.rows[0].photo;
-        post.photo_id = dataUser?.rows[0].photo_id;
+        post.photo = dataUser.rows[0].photo;
+        post.photo_id = dataUser.rows[0].photo_id;
       }
-
-      const result = await putCompanyById(post);
+      const result = await putWorkerById(post);
       if (result.rowCount > 0) {
-        console.log("ini hasil update", result.rows[0]);
+        console.log("ini hasil update worker", result.rows[0]);
         return res.status(200).json({
           status: 200,
-          message: "Edit profile company success!",
+          message: "Edit profile worker success!",
           data: result.rows[0],
         });
       } else {
-        console.log("Cant find data");
-        return res.status(404).json({ status: 404, message: "Data company not found!" });
+        console.log("Cant find data worker");
+        return res.status(404).json({ status: 404, message: "Data worker not found!" });
       }
     } catch (error) {
-      console.error("Error saat update data company", error);
-      return res.status(500).json({ status: 500, message: "Error when update data company!" });
+      console.error("Error saat update data pekerja", error);
+      return res.status(500).json({ status: 500, message: "Error when update data worker!" });
+    }
+  },
+  getById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      let dataUser = await getWorkerById(id);
+      if (!dataUser.rows[0]) {
+        return res.status(404).json({ status: 404, message: "Data worker not found!" });
+      }
+      return res.status(200).json({ status: 200, data: dataUser.rows[0] });
+    } catch (error) {
+      console.error("Error saat update data pekerja", error);
+      return res.status(500).json({ status: 500, message: "Error when update data worker!" });
     }
   },
 };

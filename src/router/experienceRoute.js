@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/jwt");
-
 const { postWE, getMyWE, getWEById, putWE, deleteWE } = require("../controller/experienceController");
 
 router.post("/experience", protect, postWE);

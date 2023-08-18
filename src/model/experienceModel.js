@@ -3,7 +3,7 @@ const Pool = require("../config/db");
 const getMyWorkExperience = async (data) => {
   const { id } = data;
   return new Promise((resolve, reject) =>
-    Pool.query(`SELECT * experience WHERE id = ${id}`, (err, result) => {
+    Pool.query(`SELECT * experience WHERE id = ${parseInt(id)}`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {
@@ -16,7 +16,7 @@ const getMyWorkExperience = async (data) => {
 const postWorkExperience = async (data) => {
   const { position, company_name, user_id, fromMonth, toMonth } = data;
   return new Promise((resolve, reject) =>
-    Pool.query(`INSERT INTO experience(position,company_name,user_id,fromMonth,toMonth) VALUES('${position}','${company_name}',${user_id},'${fromMonth}','${toMonth}')`, (err, result) => {
+    Pool.query(`INSERT INTO experience(position,company_name,user_id,fromMonth,toMonth) VALUES('${position}','${company_name}',${parseInt(user_id)},'${fromMonth}','${toMonth}')`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {
