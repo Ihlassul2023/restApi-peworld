@@ -36,15 +36,6 @@ CREATE TABLE worker (
     office VARCHAR,
     description VARCHAR,
 );
-
-
-
-
-
-
-
-
-
 --REGISTER USER--
 CREATE TABLE register_company (
     id SERIAL PRIMARY KEY,
