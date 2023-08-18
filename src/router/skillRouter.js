@@ -1,12 +1,9 @@
-const { getData, getSkillById, postData, putData, deleteDataById } = require("../controller/skillController")
-const express = require('express')
-const router = express.Router()
+const { getSkillById, postData } = require("../controller/skillController");
+const express = require("express");
+const router = express.Router();
+const { protect } = require("../middleware/jwt");
 
-
-router.get('/', getData)
-router.get('/:id', getSkillById)
-router.post('/', postData)
-router.put('/:id', putData)
-router.delete('/:user_id', deleteDataById)
+router.get("/skill", protect, getSkillById);
+router.post("/skill", protect, postData);
 
 module.exports = router;
