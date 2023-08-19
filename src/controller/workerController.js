@@ -138,7 +138,7 @@ const authController = {
         name: name || dataUser.rows[0].name,
         email: email || dataUser.rows[0].email,
         phone: phone || dataUser.rows[0].phone,
-        password: (await hashPassword(password)) || dataUser.rows[0].password,
+        password: password ? (await hashPassword(password)) : dataUser.rows[0].password,
         jobdesk: jobdesk || dataUser.rows[0].jobdesk,
         address: address || dataUser.rows[0].address,
         office: office || dataUser.rows[0].office,
