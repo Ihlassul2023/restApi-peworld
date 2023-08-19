@@ -181,7 +181,7 @@ const authController = {
     }
   },
   deleteAccount: async (req, res) => {
-    console.log('Control: Running delete recipe')
+    console.log('Control: Running delete company account')
     try {
       let user_id = req.payload.id
       // return (console.log(user_id))
