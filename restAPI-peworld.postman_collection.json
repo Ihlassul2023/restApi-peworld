@@ -1,0 +1,765 @@
+{
+	"info": {
+		"_postman_id": "43aba3be-c63c-469a-91a1-a324fceed743",
+		"name": "restAPI-peworld",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22606758"
+	},
+	"item": [
+		{
+			"name": "recruiter",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register-recruiter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "company_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "position",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:4000/register-company",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"register-company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login-recruiter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/login-company",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"login-company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "main",
+					"item": [
+						{
+							"name": "myProfileCompany",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/my-company",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"my-company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateProfileCompany",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "company_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "position",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "sector",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "province",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email_hrd",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email_corp",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "linkedin",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/update-company",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"update-company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "worker",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register-worker",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/register-worker",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"register-worker"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login-worker",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/login-worker",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"login-worker"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "skill",
+					"item": [
+						{
+							"name": "getMySkills",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/skill",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"skill"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postSkill",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "skill_name",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/skill",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"skill"
+									],
+									"query": [
+										{
+											"key": "skill_name",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSkillForRecruiter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/skill(recruiter)/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"skill(recruiter)",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "experience",
+					"item": [
+						{
+							"name": "postExperience",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "position",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "company_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "fromMonth",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "toMonth",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/experience",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"experience"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getMyExperience",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/experience",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"experience"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateMyExperience",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "position",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "company_name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "fromMonth",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "toMonth",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/experience/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"experience",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteMyExperience",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/experience/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"experience",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getExperienceById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/experience/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"experience",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getExperienceForRecruiter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/experience(recruiter)/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"experience(recruiter)",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "portfolio",
+					"item": [
+						{
+							"name": "postPortfolio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "link_repo",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/portfolio",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"portfolio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getMyPortfolio",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "updatePortfolio",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "link_repo",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{peworld}}/portfolio/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"portfolio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPortfolioById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/portfolio/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"portfolio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPortfolioForRecruiter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/portfolio(recruiter)/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"portfolio(recruiter)",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletePortfolio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{peworld}}/portfolio/:id",
+									"host": [
+										"{{peworld}}"
+									],
+									"path": [
+										"portfolio",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
