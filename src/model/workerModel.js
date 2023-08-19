@@ -16,12 +16,7 @@ const getRegisterWorker = async () => {
 const getWorkerById = async (id) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Get data worker by id");
-    pool.query(
-      `SELECT 
-        FROM worker
-        WHERE id = ${id};
-        `,
-      (err, results) => {
+    pool.query(`SELECT * FROM worker WHERE id = ${id}`, (err, results) => {
         if (!err) {
           resolve(results);
         } else {
