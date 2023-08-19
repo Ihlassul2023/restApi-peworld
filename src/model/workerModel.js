@@ -76,10 +76,24 @@ const putWorkerById = async (post) => {
   });
 };
 
+const deleteAccountWorker = async (id) => {
+  return new Promise((resolve, reject) => {
+    console.log("Model: Delete account worker", id);
+    pool.query(`DELETE FROM worker WHERE id = ${id} RETURNING *`, (err, results) => {
+      if (!err) {
+        resolve(results);
+      } else {
+        reject(err);
+      }
+    });
+  });
+};
+
 module.exports = {
   getRegisterWorker,
   getWorkerById,
   checkEmailWorker,
   postRegisterWorker,
   putWorkerById,
+  deleteAccountWorker,
 };

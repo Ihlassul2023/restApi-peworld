@@ -77,3 +77,25 @@ module.exports = {
   postRegisterCompany,
   putCompanyById,
 };
+
+const deleteAccountCompany = async (id) => {
+  return new Promise((resolve, reject) => {
+    console.log("Model: Delete account company", id);
+    pool.query(`DELETE FROM recruiter WHERE id = ${id} RETURNING *`, (err, results) => {
+      if (!err) {
+        resolve(results);
+      } else {
+        reject(err);
+      }
+    });
+  });
+};
+
+module.exports = {
+  getRegisterCompany,
+  getCompanyById,
+  checkEmailCompany,
+  postRegisterCompany,
+  putCompanyById,
+  deleteAccountCompany,
+};

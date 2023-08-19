@@ -9,5 +9,5 @@ router.get("/my-company", protect, getMyCompany);
 router.post("/register-company", upload.single("photo"), registerCompany);
 router.post("/login-company", loginCompany);
 router.put("/update-company", protect, upload.single("photo"), editCompany);
-
+router.delete("/delete-company", protect, deleteAccount);
 module.exports = router;
