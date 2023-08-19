@@ -7,7 +7,7 @@ router.post("/experience", protect, postWE);
 router.get("/experience", protect, getMyWE);
 router.put("/experience/:id", protect, putWE);
 router.get("/experience/:id", getWEById);
-router.get("/experience(recruiter)/:id", getWEByIdForRecruit);
+router.get("/hiring/:id", getWEByIdForRecruit);
 router.delete("/experience/:id", protect, deleteWE);
 
 module.exports = router;

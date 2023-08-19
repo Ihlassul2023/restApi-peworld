@@ -1,7 +1,7 @@
 const { getMyWorkExperience, getWorkExperienceById, getExperienceByIdForRecruit, postWorkExperience, putWorkExperience, deleteWorkExperienceById } = require("../model/experienceModel");
 const { StatusCodes } = require("http-status-codes");
 const getMyWE = async (req, res) => {
-  const { id } = req.payload;
+  const id = req.payload.id;
   const dataWE = await getMyWorkExperience(id);
   if (dataWE.rows.length != 0) {
     res.status(StatusCodes.OK).json({ message: "success", data: dataWE.rows });
@@ -30,7 +30,7 @@ const getWEByIdForRecruit = async (req, res) => {
 const postWE = async (req, res) => {
   req.body.user_id = req.payload.id;
   await postWorkExperience(req.body);
-  return res.status(StatusCodes.CREATED).json({ msg: "success" });
+  return res.status(StatusCodes.CREATED).json({ msg: "success", data:req.body });
 };
 const putWE = async (req, res) => {
   const { position, company_name, fromMonth, toMonth, description } = req.body;

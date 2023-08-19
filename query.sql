@@ -61,7 +61,7 @@ CREATE TABLE messages (
 -- table experience
 CREATE TABLE experience (
         id SERIAL PRIMARY KEY,
-        positon VARCHAR(200) NOT NULL,
+        position VARCHAR(200) NOT NULL,
         company_name VARCHAR(200) NOT NULL,
         fromMonth VARCHAR(255)NOT NULL,
         toMonth VARCHAR(255) NOT NULL,
