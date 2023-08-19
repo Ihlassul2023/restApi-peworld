@@ -40,7 +40,7 @@ CREATE TABLE worker (
 );
 
 --PORTOFOLIO gabung ke profile worker--
-CREATE TABLE portofolio (
+CREATE TABLE portfolio (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
     link_repo VARCHAR NOT NULL,
