@@ -13,14 +13,14 @@ CREATE TABLE recruiter (
     photo VARCHAR,
     photo_id VARCHAR,
     validate VARCHAR,
-    is_active BOOLEAN DEFAULT false
+    is_active BOOLEAN DEFAULT false,
     sector VARCHAR,
     province VARCHAR,
     city VARCHAR,
     description VARCHAR,
     email_hrd VARCHAR,
     email_corp VARCHAR,
-    linkedin VARCHAR,
+    linkedin VARCHAR
 );
 -- tabel untuk pekerja
 CREATE TABLE worker (
@@ -36,18 +36,18 @@ CREATE TABLE worker (
     jobdesk VARCHAR,
     address VARCHAR,
     office VARCHAR,
-    description VARCHAR,
+    description VARCHAR
 );
 
 --PORTOFOLIO gabung ke profile worker--
-CREATE TABLE portofolio (
+CREATE TABLE portfolio (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
     link_repo VARCHAR NOT NULL,
     type VARCHAR NOT NULL,
     photo VARCHAR NOT NULL,
     photo_id VARCHAR NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES worker(id)
 );
@@ -61,12 +61,12 @@ CREATE TABLE messages (
 -- table experience
 CREATE TABLE experience (
         id SERIAL PRIMARY KEY,
-        positon VARCHAR(200) NOT NULL,
+        position VARCHAR(200) NOT NULL,
         company_name VARCHAR(200) NOT NULL,
         fromMonth VARCHAR(255)NOT NULL,
         toMonth VARCHAR(255) NOT NULL,
         description VARCHAR(200) NOT NULL,
-        user_id INT NOT NULL,
+        user_id INT NOT NULL
     );
 ALTER TABLE experience ADD FOREIGN KEY (user_id) REFERENCES worker(id) ON DELETE CASCADE;
 
@@ -77,6 +77,6 @@ CREATE TABLE
          id SERIAL PRIMARY KEY,
         skill_name VARCHAR NOT NULL,
         user_id INT,
-        FOREIGN KEY (user_id) REFERENCES register_user(id)
+        FOREIGN KEY (user_id) REFERENCES worker(id)
     );
 

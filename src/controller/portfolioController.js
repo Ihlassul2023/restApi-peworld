@@ -1,12 +1,12 @@
-const { getMyPortofolio, getPortoByIdForRecruit, postPortfolio, putPortfolio, getPortfolioById, deletePortfolioById } = require("../model/portfolioModel");
+const { getMyPortfolio, getPortoByIdForRecruit, postPortfolio, putPortfolio, getPortfolioById, deletePortfolioById } = require("../model/portfolioModel");
 const cloudinary = require("../config/cloudinary");
 
 const { StatusCodes } = require("http-status-codes");
 const getMyPorto = async (req, res) => {
-  const { id } = req.payload;
-  const dataPorto = await getMyPortofolio(id);
+  const id = req.payload.id;
+  const dataPorto = await getMyPortfolio(id);
   if (dataPorto.rows.length != 0) {
-    res.status(StatusCodes.OK).json({ message: "success", data: dataWE.rows });
+    res.status(StatusCodes.OK).json({ message: "success", data: dataPorto.rows });
   } else {
     return res.status(404).json({ message: "data not found!" });
   }
@@ -36,10 +36,10 @@ const postPorto = async (req, res) => {
     // Jika req.file ada, upload gambar baru dan delete gambar lama
     result_up = await cloudinary.uploader.upload(req.file.path, { folder: "HireJob" });
   }
-  req.body.photo = result_up.secure_url;
-  req.body.photo_id = result_up.public_id;
+  req.body.photo = result_up?.secure_url;
+  req.body.photo_id = result_up?.public_id;
   await postPortfolio(req.body);
-  return res.status(StatusCodes.CREATED).json({ msg: "success" });
+  return res.status(StatusCodes.CREATED).json({ msg: "success", data:req.body});
 };
 const putPorto = async (req, res) => {
   const { name, link_repo, type } = req.body;

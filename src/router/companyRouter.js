@@ -1,4 +1,4 @@
-const { registerCompany, getMyCompany, getCompany, loginCompany, editCompany } = require("../controller/companyController");
+const { registerCompany, getMyCompany, getCompany, loginCompany, editCompany, deleteAccount } = require("../controller/companyController");
 const app = require("express");
 const router = app.Router();
 const upload = require("../middleware/multer");

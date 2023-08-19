@@ -26,11 +26,11 @@ const getSkillById = async (id) => {
 };
 
 const postSkill = async (data) => {
-  const { skill_name } = data;
+  const { skill_name, user_id } = data;
   console.log(data);
   console.log("model postSkill");
   return new Promise((resolve, reject) =>
-    Pool.query(`INSERT INTO skill(skill_name) VALUES('${skill_name}')`, (err, result) => {
+    Pool.query(`INSERT INTO skill(skill_name, user_id) VALUES('${skill_name}', '${user_id}')`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {
@@ -43,7 +43,7 @@ const postSkill = async (data) => {
 const putSkill = async (data) => {
   const { skill_name, user_id } = data;
   return new Promise((resolve, reject) =>
-    Pool.query(`UPDATE skill SET skill_name='${skill_name}' WHERE user_id=${user_id}`, (err, result) => {
+    Pool.query(`UPDATE skill SET skill_name='${skill_name}' WHERE user_id=${user_id} RETURNING *`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {
@@ -53,10 +53,10 @@ const putSkill = async (data) => {
   );
 };
 
-const deleteById = async (user_id) => {
-  console.log("delete user by id ->", user_id);
+const deleteById = async (id) => {
+  console.log("delete user by id ->", id);
   return new Promise((resolve, reject) =>
-    Pool.query(`DELETE FROM skill WHERE user_id=${user_id}`, (err, result) => {
+    Pool.query(`DELETE FROM skill WHERE user_id=${id}`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {

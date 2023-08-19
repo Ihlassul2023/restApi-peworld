@@ -56,9 +56,9 @@ const postRegisterCompany = async (post) => {
 const putCompanyById = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: update data company");
-    const { name, email, phone, company, position, password, photo, photo_id, sector, province, city, description, email_hrd, email_corp, linkedin, id } = post;
+    const { name, email, phone, company_name, position, password, photo, photo_id, sector, province, city, description, email_hrd, email_corp, linkedin, id } = post;
     pool.query(
-      `UPDATE recruiter SET name = '${name}', email = '${email}', phone = '${phone}', company = '${company}', position = '${position}', password = '${password}', photo = '${photo}', photo_id = '${photo_id}', sector = '${sector}', province = '${province}', city = '${city}', description = '${description}', email_hrd = '${email_hrd}', email_corp = '${email_corp}', linkedin = '${linkedin}' WHERE id = ${id} RETURNING *`,
+      `UPDATE recruiter SET name = '${name}', email = '${email}', phone = '${phone}', company_name = '${company_name}', position = '${position}', password = '${password}', photo = '${photo}', photo_id = '${photo_id}', sector = '${sector}', province = '${province}', city = '${city}', description = '${description}', email_hrd = '${email_hrd}', email_corp = '${email_corp}', linkedin = '${linkedin}' WHERE id = ${id} RETURNING *`,
       (err, results) => {
         if (!err) {
           resolve(results);
@@ -68,14 +68,6 @@ const putCompanyById = async (post) => {
       }
     );
   });
-};
-
-module.exports = {
-  getRegisterCompany,
-  getCompanyById,
-  checkEmailCompany,
-  postRegisterCompany,
-  putCompanyById,
 };
 
 const deleteAccountCompany = async (id) => {
