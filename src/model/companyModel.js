@@ -70,14 +70,6 @@ const putCompanyById = async (post) => {
   });
 };
 
-module.exports = {
-  getRegisterCompany,
-  getCompanyById,
-  checkEmailCompany,
-  postRegisterCompany,
-  putCompanyById,
-};
-
 const deleteAccountCompany = async (id) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Delete account company", id);
