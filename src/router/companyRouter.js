@@ -7,6 +7,6 @@ const {protect} = require('../middleware/jwt')
 router.get('/list-company', protect, getCompany)
 router.post('/register-company', upload.single('photo'), registerCompany)
 router.post('/login-company', loginCompany)
-router.put('/update-company/:id', protect, upload.single('photo'), editCompany)
+router.put('/update-company/', protect, upload.single('photo'), editCompany)
 
 module.exports = router

@@ -117,11 +117,11 @@ const authController = {
   },
   editCompany: async (req, res) => {
     try {
-      const { id } = req.params;
+      // const { id } = req.params;
       const { name, email, phone, company_name, position, password, sector, province, city, description, email_hrd, email_corp, linkedin } = req.body;
 
-      let dataUser = await getCompanyById(id);
       let user_id = req.payload.id;
+      let dataUser = await getCompanyById(user_id);
       // return (console.log('cek user_id', user_id))
       // return (console.log('cek dataUser', dataUser.rows[0].id))
 
@@ -137,7 +137,7 @@ const authController = {
       }
 
       let post = {
-        id: id,
+        id: user_id,
         name: name || dataUser.rows[0].name,
         email: email || dataUser.rows[0].email,
         phone: phone || dataUser.rows[0].phone,
