@@ -1,0 +1,926 @@
+{
+	"info": {
+		"_postman_id": "db9722bd-8038-4638-a5c6-7a585d6e93bc",
+		"name": "Tugas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26438294",
+		"_collection_link": "https://crimson-satellite-147722.postman.co/workspace/Team-Workspace~63ba3de5-a35b-48b7-8b0a-57e15933799e/collection/26438294-db9722bd-8038-4638-a5c6-7a585d6e93bc?action=share&source=collection_link&creator=26438294"
+	},
+	"item": [
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Company Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlBULkpvZ2xvIFNlbWFyIiwiZW1haWwiOiJqb2dsb0BnbWFpbC5jb20iLCJwaG9uZSI6IjEyMzEyMzEyMzEyLCIsImNvbXBhbnlfbmFtZSI6InVuZGVmaW5lZCIsInBvc2l0aW9uIjoidW5kZWZpbmVkIiwicGhvdG8iOiJodHRwczovL2kuaWJiLmNvL00ySlNSbVcvbm9pbWFnZS5wbmciLCJwaG90b19pZCI6Im5vX2ltYWdlIiwidmFsaWRhdGUiOiJkaWlzaSB0b2tlbiB2YWxpZGFzaSBuYW50aSIsImlzX2FjdGl2ZSI6ZmFsc2UsInNlY3RvciI6InVuZGVmaW5lZCIsInByb3ZpbmNlIjoidW5kZWZpbmVkIiwiY2l0eSI6InVuZGVmaW5lZCIsImRlc2NyaXB0aW9uIjoidW5kZWZpbmVkIiwiZW1haWxfaHJkIjoidW5kZWZpbmVkIiwiZW1haWxfY29ycCI6IiIsImxpbmtlZGluIjoiIiwiaWF0IjoxNjkyMzQ3NjMyfQ.q6uF6ttxrdVisWaAba33eA1J-apIjnT0uJGgiFMkFw0"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:4000/list-company"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6InJhbmRpIiwiZW1haWwiOiJyYW5kaUBnbWFpbC5jb20iLCJwaG9uZSI6IjgxMjMxMjMxMiIsImNvbXBhbnkiOiIiLCJwb3NpdGlvbiI6IiIsInBob3RvIjoiaHR0cHM6Ly9pLmliYi5jby9NMkpTUm1XL25vaW1hZ2UucG5nIiwicGhvdG9faWQiOiJub19pbWFnZSIsInZhbGlkYXRlIjoiIiwiaXNfYWN0aXZlIjpmYWxzZSwiaWF0IjoxNjkyMjc5MjcxfQ.Slr3R6wnZdHkGCCcTJHPtqFZaUTuS9w8fFLrevtWRB4"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "PT. Kelinci",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "kelinci@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12312312312",
+									"type": "text"
+								},
+								{
+									"key": "company_name",
+									"value": "PT. Kelinci",
+									"type": "text"
+								},
+								{
+									"key": "position",
+									"value": "HRD",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "kelinci",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "kelinci",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "photo_id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sector",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "province",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email_hrd",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email_corp",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "linkedin",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "http://localhost:4000/register-company"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Data Company Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlBULiBLZWxpbmNpIiwiZW1haWwiOiJrZWxpbmNpQGdtYWlsLmNvbSIsInBob25lIjoiMTIzMTIzMTIzMTIiLCJjb21wYW55X25hbWUiOiJQVC4gS2VsaW5jaSIsInBvc2l0aW9uIjoiSFJEIiwicGhvdG8iOm51bGwsInBob3RvX2lkIjpudWxsLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwic2VjdG9yIjpudWxsLCJwcm92aW5jZSI6bnVsbCwiY2l0eSI6bnVsbCwiZGVzY3JpcHRpb24iOm51bGwsImVtYWlsX2hyZCI6bnVsbCwiZW1haWxfY29ycCI6bnVsbCwibGlua2VkaW4iOm51bGwsImlhdCI6MTY5MjQzMTM1MX0.SfOCX4E_XpeE1Gp1a05KtiBq-6mFQRQGd-iyPD6DeiE"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "photo_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "tes",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "company_name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "position",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sector",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "province",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email_hrd",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email_corp",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "linkedin",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/update-company"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Company Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "kelinci@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "kelinci",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/login-company"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IlBULkpvZ2xvIFNlbWFyIiwiZW1haWwiOiJqb2dsb0BnbWFpbC5jb20iLCJwaG9uZSI6IjEyMzEyMzEyMzEyIiwiY29tcGFueV9uYW1lIjoiUFQuSm9nbG8gU2VtYXIiLCJwb3NpdGlvbiI6IkhSRCIsInBob3RvIjoiaHR0cHM6Ly9pLmliYi5jby9NMkpTUm1XL25vaW1hZ2UucG5nIiwicGhvdG9faWQiOiJub19pbWFnZSIsInZhbGlkYXRlIjoiZGlpc2kgdG9rZW4gdmFsaWRhc2kgbmFudGkiLCJpc19hY3RpdmUiOmZhbHNlLCJzZWN0b3IiOiJ1bmRlZmluZWQiLCJwcm92aW5jZSI6InVuZGVmaW5lZCIsImNpdHkiOiJ1bmRlZmluZWQiLCJkZXNjcmlwdGlvbiI6InVuZGVmaW5lZCIsImVtYWlsX2hyZCI6InVuZGVmaW5lZCIsImVtYWlsX2NvcnAiOiJ1bmRlZmluZWQiLCJsaW5rZWRpbiI6InVuZGVmaW5lZCIsImlhdCI6MTY5MjQxMzMzNH0.zHPdEyvYQmrnW-Z8pMO60XbGxK-JWkEWFNuOUiKO_-s"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4000/delete-company"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Experience",
+			"item": [
+				{
+					"name": "Experience (All) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/experience"
+					},
+					"response": []
+				},
+				{
+					"name": "Experience (id) Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:4000/experience/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Experience Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "position",
+									"value": "HRD",
+									"type": "text"
+								},
+								{
+									"key": "company_name",
+									"value": "PT. Dua Kelinci",
+									"type": "text"
+								},
+								{
+									"key": "fromMonth",
+									"value": "Januari",
+									"type": "text"
+								},
+								{
+									"key": "toMonth",
+									"value": "Desember",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "asdasdasd",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/experience"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Experience Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "position",
+									"value": "Finance",
+									"type": "text"
+								},
+								{
+									"key": "company_name",
+									"value": "Telkom",
+									"type": "text"
+								},
+								{
+									"key": "fromMonth",
+									"value": "Januari",
+									"type": "text"
+								},
+								{
+									"key": "toMonth",
+									"value": "Februari",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/experience/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Recruit Experience Hiring (id) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/hiring/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Experience Delete Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4000/experience/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Portfolio",
+			"item": [
+				{
+					"name": "Portfolio Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/portfolio"
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolio (id) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/portfolio/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Recruit Portfolio Hiring (id) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/portfolio-hiring/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Portfolio Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "edit porto",
+									"type": "text"
+								},
+								{
+									"key": "link_repo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/portfolio/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolio Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Porto 1",
+									"type": "text"
+								},
+								{
+									"key": "link_repo",
+									"value": "tes",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "tes",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Pictures/web/25496.jpg"
+								},
+								{
+									"key": "photo_id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "http://localhost:4000/portfolio"
+					},
+					"response": []
+				},
+				{
+					"name": "Portfolio Delete Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4000/portfolio/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "skill Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/skill"
+					},
+					"response": []
+				},
+				{
+					"name": "Skill (id) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/skillid"
+					},
+					"response": []
+				},
+				{
+					"name": "Recruit Skill Hiring (id) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/skill-hiring/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Skill Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "skill_name",
+									"value": "PHP",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/skill"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Skill Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "skill_name",
+									"value": "Javascript",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Skill Delete Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4000/skill"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Worker",
+			"item": [
+				{
+					"name": "Worker (all) Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6InJpY2t5IiwiZW1haWwiOiJyaWNreUBnbWFpbC5jb20iLCJwaG9uZSI6IjgxMjMxMjMxMiIsImNvbXBhbnkiOiIiLCJwb3NpdGlvbiI6InJpY2t5IiwicGhvdG8iOiJodHRwczovL2kuaWJiLmNvL00ySlNSbVcvbm9pbWFnZS5wbmciLCJwaG90b19pZCI6Im5vX2ltYWdlIiwidmFsaWRhdGUiOiIiLCJpc19hY3RpdmUiOmZhbHNlLCJpYXQiOjE2OTIyNzI1MzJ9.RAOK0iauVWD5Uf4elcMRtJsWNHW0A8AOT0QVIhP4epY"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://localhost:4000/list-worker"
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Worker Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJhbmRpIiwiZW1haWwiOiJyYW5kaUBnbWFpbC5jb20iLCJwaG9uZSI6IjgxMjMxMjMxMiIsInBob3RvIjpudWxsLCJwaG90b19pZCI6bnVsbCwidmFsaWRhdGUiOm51bGwsImlzX2FjdGl2ZSI6ZmFsc2UsImpvYmRlc2siOm51bGwsImFkZHJlc3MiOm51bGwsIm9mZmljZSI6bnVsbCwiZGVzY3JpcHRpb24iOm51bGwsImlhdCI6MTY5MjQxODUzMn0.gCQgzkmugmIXL0tBq6ClnY6PBW3ClFuOcelhKipwEto"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/profileWorker"
+					},
+					"response": []
+				},
+				{
+					"name": "Worker (id) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/list-worker/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "rani",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "rani@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "812312312",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "randi",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "randi",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "photo_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "jobdesk",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "office",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/register-worker"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "randi@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "randi",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/login-worker"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Worker Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InJhbmRpIiwiZW1haWwiOiJyYW5kaUBnbWFpbC5jb20iLCJwaG9uZSI6IjgxMjMxMjMxMiIsInBob3RvIjpudWxsLCJwaG90b19pZCI6bnVsbCwidmFsaWRhdGUiOm51bGwsImlzX2FjdGl2ZSI6ZmFsc2UsImpvYmRlc2siOm51bGwsImFkZHJlc3MiOm51bGwsIm9mZmljZSI6bnVsbCwiZGVzY3JpcHRpb24iOm51bGwsImlhdCI6MTY5MjQyMDI5OX0.pB2v9CfntpjmTilve_tsXXXa0SRhRZ95gnAs3sdFSTA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "tes",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "jobdesk",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "office",
+									"value": "toko",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Pictures/web/25496.jpg"
+								},
+								{
+									"key": "photo_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:4000/update-worker"
+					},
+					"response": []
+				},
+				{
+					"name": "Worker Delete Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6InJhbmRpIiwiZW1haWwiOiJyYW5kaUBnbWFpbC5jb20iLCJwaG9uZSI6IjgxMjMxMjMxMiIsInBob3RvIjpudWxsLCJwaG90b19pZCI6bnVsbCwidmFsaWRhdGUiOm51bGwsImlzX2FjdGl2ZSI6ZmFsc2UsImpvYmRlc2siOm51bGwsImFkZHJlc3MiOm51bGwsIm9mZmljZSI6bnVsbCwiZGVzY3JpcHRpb24iOm51bGwsImlhdCI6MTY5MjQxOTc0N30.nuY2bjE0AMs8L6N8oyKK8hrqWwR1VxkUD6L4fSVfcAo"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4000/delete-worker"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
