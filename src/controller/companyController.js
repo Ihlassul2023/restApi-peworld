@@ -1,4 +1,4 @@
-const { getRegisterCompany, getCompanyById, checkEmailCompany, postRegisterCompany, putCompanyById } = require("../model/companyModel");
+const { getRegisterCompany, getCompanyById, checkEmailCompany, postRegisterCompany, putCompanyById, deleteAccountCompany } = require("../model/companyModel");
 
 const { hashPassword, verifyPassword } = require("../middleware/bcrypt");
 const cloudinary = require("../config/cloudinary");
@@ -143,7 +143,7 @@ const authController = {
         phone: phone || dataUser.rows[0].phone,
         company_name: company_name || dataUser.rows[0].company_name,
         position: position || dataUser.rows[0].position,
-        password: (await hashPassword(password)) || dataUser.rows[0].password,
+        password: password ? (await hashPassword(password)) : dataUser.rows[0].password,
         sector: sector || dataUser?.rows[0].sector || "",
         province: province || dataUser?.rows[0].province || "",
         city: city || dataUser?.rows[0].city || "",
@@ -180,6 +180,34 @@ const authController = {
       return res.status(500).json({ status: 500, message: "Error when update data company!" });
     }
   },
+  deleteAccount: async (req, res) => {
+    console.log('Control: Running delete recipe')
+    try {
+      let user_id = req.payload.id
+      // return (console.log(user_id))
+      let dataCompany =  await getCompanyById(user_id)
+
+      if(user_id != dataCompany.rows[0].id){
+        return res.status(404).json({ status: 404, message: "This not your profile company!" })
+      }
+
+      if (req.file) {
+        await cloudinary.uploader.destroy(dataCompany.rows[0].photo_id);
+      }
+
+      const result = await deleteAccountCompany(user_id);
+      if (result.rowCount > 0) {
+        console.log(result.rows);
+        return res.status(200).json({ status: 200, message: "Delete success!" });
+      } else {
+        console.log('Data tidak ditemukan')
+        return res.status(404).json({ status: 404, message: "Data not found!" });
+      }
+    } catch (error) {
+        console.error(`Error : ${error.message}`);
+        return res.status(500).json({ status: 500, message: "Failed to delete account" });
+    }
+  }
 };
 
 module.exports = authController;
