@@ -137,14 +137,14 @@ const authController = {
   },
   editCompany: async (req, res) => {
     try {
-      const { id } = req.payload.id;
+      let user_id = req.payload.id;
       const { name, email, phone, company_name, position, password, sector, province, city, description, email_hrd, email_corp, linkedin } = req.body;
 
-      let dataUser = await getCompanyById(id);
+      let dataUser = await getCompanyById(user_id);
       // return (console.log('cek user_id', user_id))
       // return (console.log('cek dataUser', dataUser.rows[0].id))
 
-      if (id != dataUser.rows[0].id) {
+      if (user_id != dataUser.rows[0].id) {
         return res.status(404).json({ status: 404, message: "This not your profile company!" });
       }
       let result_up = null;
@@ -162,14 +162,14 @@ const authController = {
         phone: phone || dataUser.rows[0].phone,
         company_name: company_name || dataUser.rows[0].company_name,
         position: position || dataUser.rows[0].position,
-        password: password ? await hashPassword(password) : dataUser.rows[0].password,
-        sector: sector || dataUser?.rows[0].sector || "",
-        province: province || dataUser?.rows[0].province || "",
-        city: city || dataUser?.rows[0].city || "",
-        description: description || dataUser?.rows[0].description || "",
-        email_hrd: email_hrd || dataUser?.rows[0].email_hrd || "",
-        email_corp: email_corp || dataUser?.rows[0].email_corp || "",
-        linkedin: linkedin || dataUser?.rows[0].linkedin || "",
+        password: password ? (await hashPassword(password)) : dataUser.rows[0].password,
+        sector: sector || dataUser.rows[0].sector,
+        province: province || dataUser.rows[0].province,
+        city: city || dataUser.rows[0].city,
+        description: description || dataUser.rows[0].description,
+        email_hrd: email_hrd || dataUser.rows[0].email_hrd,
+        email_corp: email_corp || dataUser.rows[0].email_corp,
+        linkedin: linkedin || dataUser.rows[0].linkedin,
       };
 
       if (result_up) {
