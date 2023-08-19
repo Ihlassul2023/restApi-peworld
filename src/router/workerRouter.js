@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 const { registerWorker, getProfileWorker, getWorker, loginWorker, editWorker, getById, deleteAccount } = require("../controller/workerController");
 
-=======
-const { registerWorker, getWorker, loginWorker, editWorker, getById, getProfileWorker, deleteAccount } = require("../controller/workerController");
->>>>>>> menu/profile
 const app = require("express");
 const router = app.Router();
 const upload = require("../middleware/multer");
