@@ -5,7 +5,7 @@ const upload = require("../middleware/multer");
 const { protect } = require("../middleware/jwt");
 
 router.get("/list-worker", protect, getWorker);
-router.get("/profilWorker", protect, getProfileWorker);
+router.get("/profileWorker", protect, getProfileWorker);
 router.get("/list-worker/:id", getById);
 router.post("/register-worker", upload.single("photo"), registerWorker);
 router.post("/login-worker", loginWorker);
