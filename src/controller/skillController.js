@@ -5,7 +5,7 @@ const SkillController = {
     try {
       let data = await getSkillAll();
       if (data) {
-        res.status(200).json({ status: 200, message: "get data skill success", data: data.rows });
+        return res.status(200).json({ status: 200, message: "get data skill success", data: data.rows });
       }
     } catch (err) {
       return res.status(404).json({ status: 404, message: err.message });
@@ -77,7 +77,7 @@ const SkillController = {
 
   putData: async (req, res, next) => {
     try {
-      const { id } = req.params;
+      const { id } = req.payload;
       const { skill_name } = req.body;
 
       if (!id || id <= 0 || isNaN(id)) {
@@ -90,11 +90,12 @@ const SkillController = {
       }
       let data = {
         skill_name: skill_name || dataSkillId.rows[0].skill_name,
+        user_id: id
       };
 
-      let result = await putSkill(data, id);
+      let result = await putSkill(data);
 
-      return res.status(200).json({ status: 200, message: "update skill success", data });
+      return res.status(200).json({ status: 200, message: "update skill success", data:result.rows[0] });
     } catch (err) {
       return res.status(404).json({ status: 404, message: err.message });
     }
@@ -102,13 +103,13 @@ const SkillController = {
 
   deleteDataById: async (req, res, next) => {
     try {
-      const { user_id } = req.params;
+      const { id } = req.payload;
 
-      if (!user_id || user_id <= 0 || isNaN(user_id)) {
+      if (!id || id <= 0 || isNaN(id)) {
         return res.status(404).json({ message: "id wrong" });
       }
 
-      let result = await deleteById(parseInt(user_id));
+      let result = await deleteById(parseInt(id));
       console.log(result);
       if (result.rowCount == 0) {
         throw new Error("delete data failed");

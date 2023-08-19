@@ -77,6 +77,6 @@ CREATE TABLE
          id SERIAL PRIMARY KEY,
         skill_name VARCHAR NOT NULL,
         user_id INT,
-        FOREIGN KEY (user_id) REFERENCES register_user(id)
+        FOREIGN KEY (user_id) REFERENCES worker(id)
     );
 
