@@ -50,6 +50,17 @@ const getWorkExperienceById = async (id) => {
     })
   );
 };
+const getExperienceByIdForRecruit = async (id) => {
+  return new Promise((resolve, reject) =>
+    Pool.query(`SELECT * FROM experience WHERE user_id=${id}`, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
 
 const deleteWorkExperienceById = async (id) => {
   return new Promise((resolve, reject) =>
@@ -63,4 +74,4 @@ const deleteWorkExperienceById = async (id) => {
   );
 };
 
-module.exports = { getMyWorkExperience, postWorkExperience, putWorkExperience, getWorkExperienceById, deleteWorkExperienceById };
+module.exports = { getMyWorkExperience, postWorkExperience, putWorkExperience, getWorkExperienceById, deleteWorkExperienceById, getExperienceByIdForRecruit };

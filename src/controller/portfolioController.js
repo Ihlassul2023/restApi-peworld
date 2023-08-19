@@ -1,4 +1,4 @@
-const { getMyPortofolio, postPortfolio, putPortfolio, getPortfolioById, deletePortfolioById } = require("../model/portfolioModel");
+const { getMyPortofolio, getPortoByIdForRecruit, postPortfolio, putPortfolio, getPortfolioById, deletePortfolioById } = require("../model/portfolioModel");
 const cloudinary = require("../config/cloudinary");
 
 const { StatusCodes } = require("http-status-codes");
@@ -16,6 +16,15 @@ const getPortoById = async (req, res) => {
   const dataPorto = await getPortfolioById(id);
   if (dataPorto.rows[0]) {
     res.status(StatusCodes.OK).json({ msg: "success", data: dataPorto.rows[0] });
+  } else {
+    return res.status(404).json({ msg: "data not found!" });
+  }
+};
+const getPortByIdForRecruit = async (req, res) => {
+  const { id } = req.params;
+  const dataPorto = await getPortoByIdForRecruit(id);
+  if (dataPorto.rows.length != 0) {
+    res.status(StatusCodes.OK).json({ msg: "success", data: dataPorto.rows });
   } else {
     return res.status(404).json({ msg: "data not found!" });
   }
@@ -62,4 +71,4 @@ const deletePorto = async (req, res) => {
   await deletePortfolioById(id);
   res.status(StatusCodes.CREATED).json({ msg: "success" });
 };
-module.exports = { getMyPorto, getPortoById, postPorto, putPorto, deletePorto };
+module.exports = { getMyPorto, getPortoById, postPorto, putPorto, deletePorto, getPortByIdForRecruit };

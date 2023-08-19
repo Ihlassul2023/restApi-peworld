@@ -1,4 +1,4 @@
-const { getMyWorkExperience, getWorkExperienceById, postWorkExperience, putWorkExperience, deleteWorkExperienceById } = require("../model/experienceModel");
+const { getMyWorkExperience, getWorkExperienceById, getExperienceByIdForRecruit, postWorkExperience, putWorkExperience, deleteWorkExperienceById } = require("../model/experienceModel");
 const { StatusCodes } = require("http-status-codes");
 const getMyWE = async (req, res) => {
   const { id } = req.payload;
@@ -12,8 +12,17 @@ const getMyWE = async (req, res) => {
 const getWEById = async (req, res) => {
   const { id } = req.params;
   const dataWE = await getWorkExperienceById(id);
-  if (dataWE.rows[0]) {
+  if (dataWE.rows.length != 0) {
     res.status(StatusCodes.OK).json({ msg: "success", data: dataWE.rows[0] });
+  } else {
+    return res.status(404).json({ msg: "data not found!" });
+  }
+};
+const getWEByIdForRecruit = async (req, res) => {
+  const { id } = req.params;
+  const dataWE = await getExperienceByIdForRecruit(id);
+  if (dataWE.rows.length != 0) {
+    res.status(StatusCodes.OK).json({ msg: "success", data: dataWE.rows });
   } else {
     return res.status(404).json({ msg: "data not found!" });
   }
@@ -44,4 +53,4 @@ const deleteWE = async (req, res) => {
   await deleteWorkExperienceById(id);
   res.status(StatusCodes.CREATED).json({ msg: "success" });
 };
-module.exports = { getMyWE, getWEById, postWE, putWE, deleteWE };
+module.exports = { getMyWE, getWEById, postWE, putWE, deleteWE, getWEByIdForRecruit };

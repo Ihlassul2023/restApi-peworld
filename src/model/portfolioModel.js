@@ -50,6 +50,17 @@ const getPortfolioById = async (id) => {
     })
   );
 };
+const getPortoByIdForRecruit = async (id) => {
+  return new Promise((resolve, reject) =>
+    Pool.query(`SELECT * FROM portofolio WHERE user_id=${parseInt(id)}`, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
 
 const deletePortfolioById = async (id) => {
   return new Promise((resolve, reject) =>
@@ -63,4 +74,4 @@ const deletePortfolioById = async (id) => {
   );
 };
 
-module.exports = { getMyPortofolio, postPortfolio, putPortfolio, getPortfolioById, deletePortfolioById };
+module.exports = { getMyPortofolio, postPortfolio, putPortfolio, getPortfolioById, getPortoByIdForRecruit, deletePortfolioById };

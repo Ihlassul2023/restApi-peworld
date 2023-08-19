@@ -24,11 +24,31 @@ const authController = {
       return res.status(500).json({ status: 500, message: "Get data company error!" });
     }
   },
+  getMyCompany: async (req, res) => {
+    try {
+      const { id } = req.payload;
+      const result = await getCompanyById(parseInt(id));
+      if (result.rows.length > 0) {
+        console.log("Hasil get company", result.rows);
+        return res.status(200).json({
+          status: 200,
+          message: "Get register company success!",
+          data: result.rows[0],
+        });
+      } else {
+        console.log("Data perusahaan tidak ditemukan");
+        return res.status(404).json({ status: 404, message: "Data register company not found!" });
+      }
+    } catch (error) {
+      console.error("Error saat get company:", error.message);
+      return res.status(500).json({ status: 500, message: "Get data company error!" });
+    }
+  },
   registerCompany: async (req, res) => {
     try {
       const { name, email, phone, company_name, position, password, confirm_password } = req.body;
 
-      if (!name || !email || !phone || !password || !confirm_password) {
+      if (!name || !email || !phone || !company_name || !position || !password || !confirm_password) {
         return res.status(404).json({
           status: 404,
           message: "Name, email, phone, password must be filled!",
@@ -117,15 +137,14 @@ const authController = {
   },
   editCompany: async (req, res) => {
     try {
-      const { id } = req.params;
+      const { id } = req.payload.id;
       const { name, email, phone, company_name, position, password, sector, province, city, description, email_hrd, email_corp, linkedin } = req.body;
 
       let dataUser = await getCompanyById(id);
-      let user_id = req.payload.id;
       // return (console.log('cek user_id', user_id))
       // return (console.log('cek dataUser', dataUser.rows[0].id))
 
-      if (user_id != dataUser.rows[0].id) {
+      if (id != dataUser.rows[0].id) {
         return res.status(404).json({ status: 404, message: "This not your profile company!" });
       }
       let result_up = null;
