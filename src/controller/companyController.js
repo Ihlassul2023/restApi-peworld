@@ -51,7 +51,7 @@ const authController = {
       if (!name || !email || !phone || !company_name || !position || !password || !confirm_password) {
         return res.status(404).json({
           status: 404,
-          message: "Name, email, phone, password must be filled!",
+          message: "Name, email, phone, company, position, password/confirm password must be filled!",
         });
       } else if (password != confirm_password) {
         return res.status(404).json({ message: "Password and confirmation password do not match." });
