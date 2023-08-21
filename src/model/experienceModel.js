@@ -3,7 +3,7 @@ const Pool = require("../config/db");
 const getMyWorkExperience = async (id) => {
   // const { id } = data;
   return new Promise((resolve, reject) =>
-    Pool.query(`SELECT * FROM experience WHERE id = ${id}`, (err, result) => {
+    Pool.query(`SELECT * FROM experience WHERE user_id = ${id}`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {
