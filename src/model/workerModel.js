@@ -43,8 +43,8 @@ const checkEmailWorker = async (email) => {
 const postRegisterWorker = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Post/register worker");
-    const { name, email, phone, password } = post;
-    pool.query(`INSERT INTO worker (name, email, phone,  password) VALUES ('${name}', '${email}', '${phone}', '${password}') RETURNING *`, (err, results) => {
+    const { name, email, phone, password, photo, photo_id } = post;
+    pool.query(`INSERT INTO worker (name, email, phone, password, photo, photo_id) VALUES ('${name}', '${email}', '${phone}', '${password}', '${photo}', '${photo_id}') RETURNING *`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {
