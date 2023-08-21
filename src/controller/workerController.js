@@ -200,8 +200,8 @@ const authController = {
       }
       return res.status(200).json({ status: 200, data: dataUser.rows[0] });
     } catch (error) {
-      console.error("Error saat update data pekerja", error);
-      return res.status(500).json({ status: 500, message: "Error when update data worker!" });
+      console.error("Error when get data worker", error);
+      return res.status(500).json({ status: 500, message: "Error when get data worker!" });
     }
   },
   deleteAccount: async (req, res) => {
