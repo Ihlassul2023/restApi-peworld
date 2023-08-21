@@ -11,7 +11,7 @@
 			"name": "Company",
 			"item": [
 				{
-					"name": "Company Copy",
+					"name": "Company",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -33,7 +33,7 @@
 					"response": []
 				},
 				{
-					"name": "Register Copy",
+					"name": "Register",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -142,7 +142,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Data Company Copy",
+					"name": "Update Data Company",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -237,7 +237,7 @@
 					"response": []
 				},
 				{
-					"name": "Login Company Copy",
+					"name": "Login Company",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -261,7 +261,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Account Copy",
+					"name": "Delete Account",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -281,7 +281,7 @@
 			"name": "Experience",
 			"item": [
 				{
-					"name": "Experience (All) Copy",
+					"name": "Experience (All)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -290,7 +290,7 @@
 					"response": []
 				},
 				{
-					"name": "Experience (id) Copy",
+					"name": "Experience (id)",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -306,7 +306,7 @@
 					"response": []
 				},
 				{
-					"name": "Experience Copy",
+					"name": "Experience",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -351,7 +351,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Experience Copy",
+					"name": "Edit Experience",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -391,7 +391,7 @@
 					"response": []
 				},
 				{
-					"name": "Recruit Experience Hiring (id) Copy",
+					"name": "Recruit Experience Hiring (id)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -400,7 +400,7 @@
 					"response": []
 				},
 				{
-					"name": "Experience Delete Copy",
+					"name": "Experience Delete",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -420,7 +420,7 @@
 			"name": "Portfolio",
 			"item": [
 				{
-					"name": "Portfolio Copy",
+					"name": "Portfolio",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -435,7 +435,7 @@
 					"response": []
 				},
 				{
-					"name": "Portfolio (id) Copy",
+					"name": "Portfolio (id)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -450,7 +450,7 @@
 					"response": []
 				},
 				{
-					"name": "Recruit Portfolio Hiring (id) Copy",
+					"name": "Recruit Portfolio Hiring (id)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -465,7 +465,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Portfolio Copy",
+					"name": "Edit Portfolio",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -505,7 +505,7 @@
 					"response": []
 				},
 				{
-					"name": "Portfolio Copy",
+					"name": "Portfolio",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -551,7 +551,7 @@
 					"response": []
 				},
 				{
-					"name": "Portfolio Delete Copy",
+					"name": "Portfolio Delete",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -571,7 +571,7 @@
 			"name": "Skill",
 			"item": [
 				{
-					"name": "skill Copy",
+					"name": "skill",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -586,7 +586,7 @@
 					"response": []
 				},
 				{
-					"name": "Skill (id) Copy",
+					"name": "Skill (id)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -601,7 +601,7 @@
 					"response": []
 				},
 				{
-					"name": "Recruit Skill Hiring (id) Copy",
+					"name": "Recruit Skill Hiring (id)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -610,12 +610,12 @@
 					"response": []
 				},
 				{
-					"name": "Skill Copy",
+					"name": "Skill",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6IkJhbWJhbmciLCJlbWFpbCI6ImJhbWJhbmdAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6bnVsbCwicGhvdG9faWQiOm51bGwsInZhbGlkYXRlIjpudWxsLCJpc19hY3RpdmUiOmZhbHNlLCJqb2JkZXNrIjpudWxsLCJhZGRyZXNzIjpudWxsLCJvZmZpY2UiOm51bGwsImRlc2NyaXB0aW9uIjpudWxsLCJpYXQiOjE2OTI1ODE3MjB9.JfjebS3hjtXblKJDVrcR3_JPrrt2jczk-iO__l0ifqA"
 							}
 						},
 						"method": "POST",
@@ -625,7 +625,7 @@
 							"urlencoded": [
 								{
 									"key": "skill_name",
-									"value": "PHP",
+									"value": "PHP, Java, Javascript",
 									"type": "text"
 								}
 							]
@@ -635,7 +635,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Skill Copy",
+					"name": "Edit Skill",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -677,7 +677,7 @@
 					"response": []
 				},
 				{
-					"name": "Skill Delete Copy",
+					"name": "Skill Delete",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -690,6 +690,57 @@
 						"url": "http://localhost:4000/skill"
 					},
 					"response": []
+				},
+				{
+					"name": "Search Sort",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6InRlcyIsImVtYWlsIjoicmFuZGlAZ21haWwuY29tIiwicGhvbmUiOiI4MTIzMTIzMTIiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RqMG5xdHZnOS9pbWFnZS91cGxvYWQvdjE2OTI0MjE5NjcvSGlyZUpvYi9ydXZiaWo1d28zeDVwa2ptdHNlby5qcGciLCJwaG90b19pZCI6IkhpcmVKb2IvcnV2YmlqNXdvM3g1cGtqbXRzZW8iLCJ2YWxpZGF0ZSI6bnVsbCwiaXNfYWN0aXZlIjpmYWxzZSwiam9iZGVzayI6Im51bGwiLCJhZGRyZXNzIjoibnVsbCIsIm9mZmljZSI6InRva28iLCJkZXNjcmlwdGlvbiI6Im51bGwiLCJpYXQiOjE2OTI0MzM5NzZ9.iq2Dmkwb913WT6ZNpos6EDBkVMlR1br7IYl5wpq5caM"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/search?limit=5&page=1&sort=DESC&sortby=skill&searchby=skill_name&search=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "DESC"
+								},
+								{
+									"key": "sortby",
+									"value": "skill"
+								},
+								{
+									"key": "searchby",
+									"value": "skill_name"
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -697,7 +748,7 @@
 			"name": "Worker",
 			"item": [
 				{
-					"name": "Worker (all) Copy",
+					"name": "Worker (all)",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -719,7 +770,7 @@
 					"response": []
 				},
 				{
-					"name": "Profile Worker Copy",
+					"name": "Profile Worker",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -734,7 +785,7 @@
 					"response": []
 				},
 				{
-					"name": "Worker (id) Copy",
+					"name": "Worker (id)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -743,7 +794,7 @@
 					"response": []
 				},
 				{
-					"name": "Register Copy",
+					"name": "Register",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -752,12 +803,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "rani",
+									"value": "Bambang",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "rani@gmail.com",
+									"value": "bambang@gmail.com",
 									"type": "text"
 								},
 								{
@@ -767,12 +818,12 @@
 								},
 								{
 									"key": "password",
-									"value": "randi",
+									"value": "bambang",
 									"type": "text"
 								},
 								{
 									"key": "confirm_password",
-									"value": "randi",
+									"value": "bambang",
 									"type": "text"
 								},
 								{
@@ -812,7 +863,7 @@
 					"response": []
 				},
 				{
-					"name": "Login Copy",
+					"name": "Login Worker",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -821,12 +872,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "randi@gmail.com",
+									"value": "bambang@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "randi",
+									"value": "bambang",
 									"type": "text"
 								}
 							]
@@ -836,7 +887,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Worker Copy",
+					"name": "Edit Worker",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -906,7 +957,7 @@
 					"response": []
 				},
 				{
-					"name": "Worker Delete Copy",
+					"name": "Worker Delete",
 					"request": {
 						"auth": {
 							"type": "bearer",

@@ -1,4 +1,4 @@
-const { getSkillAll, getSkillById, postSkill, putSkill, deleteById } = require("../model/skillModel");
+const { getSkillAll, getSkillById, postSkill, putSkill, deleteById, searchAndSort } = require("../model/skillModel");
 
 const SkillController = {
   getData: async (req, res, next) => {
@@ -119,6 +119,40 @@ const SkillController = {
       return res.status(404).json({ status: 404, message: err.message });
     }
   },
+  searchSort: async (req, res) => {
+    console.log('Control: Running search sort worker')
+    try {
+      const {searchby, search, sortby, sort, limit} = req.query
+      let page = parseInt(req.query.page) || 1;
+      let limiter = limit || 5
+
+      const post = {
+        sortby: sortby || 'name',
+        sort: sort || 'ASC',
+        limit: limit || 5,
+        offset: (page - 1) * limiter,
+        searchby: searchby || 'skill',
+        search: search 
+      };
+      const resultTotal = await getSkillAll()
+      const result = await searchAndSort(post);
+      let pagination = {
+        totalPage: Math.ceil(resultTotal.rowCount / limiter),
+        totalData: parseInt(result.count),
+        pageNow: page
+      };
+      if (result.rows.length > 0) {
+        console.log(result.rows);
+        return res.status(200).json({data:result.rows, page:pagination});
+      } else {
+        console.log('Data tidak ditemukan');
+        return res.status(404).json({status: 404, message: "Data not found"});
+      }
+    } catch (error) {
+        console.error(`Error : ${error.message}`);
+        return res.status(500).json({status: 500, message: "Search and sort data error"});
+    }
+  }
 };
 
 module.exports = SkillController;

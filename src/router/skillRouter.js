@@ -1,4 +1,4 @@
-const { getSkillById, postData, getSkillByIdForRecruit, putData, deleteDataById, getData } = require("../controller/skillController");
+const { getSkillById, postData, getSkillByIdForRecruit, putData, deleteDataById, getData, searchSort } = require("../controller/skillController");
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/jwt");
@@ -9,5 +9,6 @@ router.get("/skill-hiring/:id", getSkillByIdForRecruit);
 router.post("/skill", protect, postData);
 router.put("/skill", protect, putData);
 router.delete("/skill", protect, deleteDataById);
+router.get("/search", protect, searchSort);
 
 module.exports = router;

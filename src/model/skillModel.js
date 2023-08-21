@@ -66,4 +66,22 @@ const deleteById = async (id) => {
   );
 };
 
-module.exports = { getSkillAll, getSkillById, postSkill, putSkill, deleteById };
+const searchAndSort = async (post) => {
+  return new Promise((resolve, reject) => {
+    console.log('Model: search and sort worker', post)
+    const {searchby, search, sortby, sort, offset, limit} = post
+    Pool.query(`SELECT worker.name, worker.photo, worker.jobdesk, worker.address, worker.office, worker.description, skill.skill_name FROM skill JOIN worker ON skill.user_id = worker.id WHERE ${searchby} ILIKE '%${search}%' ORDER BY ${sortby} ${sort} OFFSET ${offset} LIMIT ${limit}`, (err, results) => {
+      if(!err){
+        const data = {
+          count: results.rowCount, // Jumlah total data (total row count)
+          rows: results.rows, // Data hasil query
+        };
+        resolve(data)
+      } else {
+        reject(err)
+      }
+    })
+  })
+}
+
+module.exports = { getSkillAll, getSkillById, postSkill, putSkill, deleteById, searchAndSort };
