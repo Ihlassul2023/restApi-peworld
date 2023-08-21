@@ -63,8 +63,8 @@ CREATE TABLE experience (
         id SERIAL PRIMARY KEY,
         position VARCHAR(200) NOT NULL,
         company_name VARCHAR(200) NOT NULL,
-        fromMonth VARCHAR(255)NOT NULL,
-        toMonth VARCHAR(255) NOT NULL,
+        from_month VARCHAR(255)NOT NULL,
+        to_month VARCHAR(255) NOT NULL,
         description VARCHAR(200) NOT NULL,
         user_id INT NOT NULL
     );
