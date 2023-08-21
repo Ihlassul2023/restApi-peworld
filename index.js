@@ -5,6 +5,10 @@ const worker = require("./src/router/workerRouter");
 const experience = require("./src/router/experienceRoute");
 const skill = require("./src/router/skillRouter");
 const portfolio = require("./src/router/portfolioRouter");
+const cors = require('cors');
+
+// Gunakan middleware cors untuk mengizinkan permintaan dari asal yang berbeda
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

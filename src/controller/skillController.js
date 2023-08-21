@@ -26,7 +26,7 @@ const SkillController = {
         return res.status(200).json({ status: 200, message: "get data skill not found", data: [] });
       }
 
-      return res.status(200).json({ status: 200, message: "get data recipe success", data: dataSkillId.rows[0] });
+      return res.status(200).json({ status: 200, message: "get data success", data: dataSkillId.rows[0] });
     } catch (err) {
       return res.status(404).json({ status: 404, message: err.message });
     }
@@ -45,7 +45,7 @@ const SkillController = {
         return res.status(200).json({ status: 200, message: "get data skill not found", data: [] });
       }
 
-      return res.status(200).json({ status: 200, message: "get data recipe success", data: dataSkillId.rows[0] });
+      return res.status(200).json({ status: 200, message: "get data success", data: dataSkillId.rows });
     } catch (err) {
       return res.status(404).json({ status: 404, message: err.message });
     }

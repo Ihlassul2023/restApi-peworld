@@ -198,7 +198,7 @@ const authController = {
       if (!dataUser.rows[0]) {
         return res.status(404).json({ status: 404, message: "Data worker not found!" });
       }
-      return res.status(200).json({ status: 200, data: dataUser.rows[0] });
+      return res.status(200).json({ status: 200, data: dataUser.rows });
     } catch (error) {
       console.error("Error saat update data pekerja", error);
       return res.status(500).json({ status: 500, message: "Error when update data worker!" });

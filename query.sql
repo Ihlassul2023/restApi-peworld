@@ -1,5 +1,5 @@
 
--- Active: 1689385551112@@127.0.0.1@5432@kelompok3
+-- Active: 1692324521013@@127.0.0.1@5432@projectbe
 
 -- tabel untuk perekrut
 CREATE TABLE recruiter (
