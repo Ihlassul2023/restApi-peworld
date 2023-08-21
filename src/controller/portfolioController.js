@@ -68,6 +68,10 @@ const putPorto = async (req, res) => {
 };
 const deletePorto = async (req, res) => {
   const { id } = req.params;
+  let getPorto = await getPortoById(id)
+  if(getPorto){
+    await cloudinary.uploader.destroy(getPorto.rows[0].photo_id);
+  }
   await deletePortfolioById(id);
   res.status(StatusCodes.CREATED).json({ msg: "success" });
 };
