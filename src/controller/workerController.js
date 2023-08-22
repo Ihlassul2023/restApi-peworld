@@ -1,8 +1,10 @@
-const { getRegisterWorker, getWorkerById, checkEmailWorker, postRegisterWorker, putWorkerById, deleteAccountWorker } = require("../model/workerModel");
+const { getRegisterWorker, getWorkerById, checkEmailWorker, postRegisterWorker, putWorkerById, deleteAccountWorker, activatedAccount } = require("../model/workerModel");
 
 const { hashPassword, verifyPassword } = require("../middleware/bcrypt");
 const cloudinary = require("../config/cloudinary");
 const { generateToken } = require("../middleware/jwt");
+const { v4: uuidv4 } = require('uuid');
+const sendEmail = require('../middleware/verifEmail');
 
 const authController = {
   getWorker: async (req, res) => {
@@ -65,12 +67,14 @@ const authController = {
         });
       }
 
+      let uuid = uuidv4()
+
       let post = {
         name: name,
         email: email,
         phone: phone,
         password: await hashPassword(password),
-        validate: "ini untuk token aktivasi",
+        validate: uuid,
       };
 
       if (req.file) {
@@ -87,9 +91,15 @@ const authController = {
       const result = await postRegisterWorker(post);
       if (result) {
         console.log("Hasil register pekerja", result.rows);
+
+        let resultSend = await sendEmail(email, name, `${process.env.BASE_URL}:4000/verify-worker/${uuid}`);
+
+        console.log("sendEmail", resultSend);
+        console.log(resultSend)
+
         return res.status(200).json({
           status: 200,
-          message: "Registration worker success!",
+          message: "Registration worker success, check email for verification!",
           data: result.rows[0],
         });
       }
@@ -120,6 +130,11 @@ const authController = {
         delete user.password;
         const token = generateToken(user);
         user.token = token;
+        if (!user.is_active) {
+          return res
+            .status(404)
+            .json({ status: 404, message: "Email has not been activated" });
+        }
         return res.status(200).json({
           status: 200,
           message: "Login success!",
@@ -231,7 +246,16 @@ const authController = {
         console.error(`Error : ${error.message}`);
         return res.status(500).json({ status: 500, message: "Failed to delete account" });
     }
-  }
+  },
+  verify: async (req, res, next) => {
+    const { id } = req.params;
+    let result = await activatedAccount(id);
+    console.log("result activated worker", result);
+    if (result.rowCount !== 0) {
+      return res.status(200).json({ status: 200, message: "Verify success you can login now" });
+    }
+    return res.status(404).json({ status: 404, message: "Verify failed try again" });
+  },
 };
 
 module.exports = authController;

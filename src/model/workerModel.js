@@ -43,8 +43,8 @@ const checkEmailWorker = async (email) => {
 const postRegisterWorker = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Post/register worker");
-    const { name, email, phone, password } = post;
-    pool.query(`INSERT INTO worker (name, email, phone, password) VALUES ('${name}', '${email}', '${phone}', '${password}') RETURNING *`, (err, results) => {
+    const { name, email, phone, password, validate } = post;
+    pool.query(`INSERT INTO worker (name, email, phone, password, validate ) VALUES ('${name}', '${email}', '${phone}', '${password}', '${validate}') RETURNING *`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {
@@ -84,6 +84,19 @@ const deleteAccountWorker = async (id) => {
   });
 };
 
+const activatedAccount = async (uuid) => {
+  console.log("model activate")
+  return new Promise((resolve,reject)=>
+      pool.query(`UPDATE worker SET is_active = true WHERE validate = '${uuid}';`,(err,result)=>{
+          if(!err){
+              resolve(result)
+          } else{
+              reject(err)
+          }
+      })
+  )
+}
+
 module.exports = {
   getRegisterWorker,
   getWorkerById,
@@ -91,4 +104,5 @@ module.exports = {
   postRegisterWorker,
   putWorkerById,
   deleteAccountWorker,
+  activatedAccount
 };

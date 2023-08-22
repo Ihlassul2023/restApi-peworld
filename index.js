@@ -23,5 +23,5 @@ app.use(skill);
 app.use(portfolio);
 
 app.listen(4000, () => {
-  console.log(`App running on http://localhost:4000`);
+  console.log(`App running on ${process.env.BASE_URL}:4000`);
 });
