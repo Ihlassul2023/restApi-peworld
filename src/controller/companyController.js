@@ -95,7 +95,7 @@ const authController = {
       if (result) {
         console.log("Hasil register perusahaan", result.rows);
 
-        let resultSend = await sendEmail(email, name, `https://client-peworld.vercel.app/${uuid}`);
+        let resultSend = await sendEmail(email, name, `https://client-peworld.vercel.app/email-verify-recruiter/${uuid}`);
 
         console.log("sendEmail", resultSend);
         console.log(resultSend);
