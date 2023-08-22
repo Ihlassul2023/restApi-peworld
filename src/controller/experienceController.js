@@ -33,14 +33,14 @@ const postWE = async (req, res) => {
   return res.status(StatusCodes.CREATED).json({ msg: "success", data:req.body });
 };
 const putWE = async (req, res) => {
-  const { position, company_name, fromMonth, toMonth, description } = req.body;
+  const { position, company_name, from_month, to_month, description } = req.body;
   const { id } = req.params;
   const dataWE = await getWorkExperienceById(id);
   const data = {
     position: position || dataWE.rows[0].position,
     company_name: company_name || dataWE.rows[0].company_name,
-    fromMonth: fromMonth || dataWE.rows[0].fromMonth,
-    toMonth: toMonth || dataWE.rows[0].toMonth,
+    from_month: from_month || dataWE.rows[0].from_month,
+    to_month: to_month || dataWE.rows[0].to_month,
     user_id: parseInt(req.payload.id),
     description: description || dataWE.rows[0].description,
     id,

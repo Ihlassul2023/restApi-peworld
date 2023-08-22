@@ -1,8 +1,10 @@
-const { getRegisterCompany, getCompanyById, checkEmailCompany, postRegisterCompany, putCompanyById, deleteAccountCompany } = require("../model/companyModel");
+const { getRegisterCompany, getCompanyById, checkEmailCompany, postRegisterCompany, putCompanyById, deleteAccountCompany, activatedAccount } = require("../model/companyModel");
 
 const { hashPassword, verifyPassword } = require("../middleware/bcrypt");
 const cloudinary = require("../config/cloudinary");
 const { generateToken } = require("../middleware/jwt");
+const { v4: uuidv4 } = require("uuid");
+const sendEmail = require("../middleware/verifEmail");
 
 const authController = {
   getCompany: async (req, res) => {
@@ -27,6 +29,7 @@ const authController = {
   getMyCompany: async (req, res) => {
     try {
       const { id } = req.payload;
+      console.log(id);
       const result = await getCompanyById(parseInt(id));
       if (result.rows.length > 0) {
         console.log("Hasil get company", result.rows);
@@ -51,7 +54,7 @@ const authController = {
       if (!name || !email || !phone || !company_name || !position || !password || !confirm_password) {
         return res.status(404).json({
           status: 404,
-          message: "Name, email, phone, password must be filled!",
+          message: "Name, email, phone, company, position, password/confirm password must be filled!",
         });
       } else if (password != confirm_password) {
         return res.status(404).json({ message: "Password and confirmation password do not match." });
@@ -65,6 +68,8 @@ const authController = {
         });
       }
 
+      let uuid = uuidv4();
+
       let post = {
         name,
         email,
@@ -72,7 +77,7 @@ const authController = {
         company_name,
         position,
         password: await hashPassword(password),
-        validate: "diisi token validasi nanti",
+        validate: uuid,
       };
 
       if (req.file) {
@@ -89,9 +94,14 @@ const authController = {
       const result = await postRegisterCompany(post);
       if (result) {
         console.log("Hasil register perusahaan", result.rows);
+
+        let resultSend = await sendEmail(email, name, `http://localhost:5173/email-verify-recruiter/${uuid}`);
+
+        console.log("sendEmail", resultSend);
+        console.log(resultSend);
         return res.status(200).json({
           status: 200,
-          message: "Registration company success!",
+          message: "Registration company success, check email for verification!",
           data: result.rows[0],
         });
       }
@@ -122,6 +132,9 @@ const authController = {
         delete user.password;
         const token = generateToken(user);
         user.token = token;
+        if (!user.is_active) {
+          return res.status(404).json({ status: 404, message: "Email has not been activated" });
+        }
         return res.status(200).json({
           status: 200,
           message: "Login success!",
@@ -152,7 +165,7 @@ const authController = {
       if (req.file) {
         // Jika req.file ada, upload gambar baru dan delete gambar lama
         result_up = await cloudinary.uploader.upload(req.file.path, { folder: "HireJob" });
-        await cloudinary.uploader.destroy(dataUser.rows[0].photo_id);
+        await cloudinary.uploader.destroy(dataUser?.rows[0].photo_id);
       }
 
       let post = {
@@ -162,7 +175,7 @@ const authController = {
         phone: phone || dataUser.rows[0].phone,
         company_name: company_name || dataUser.rows[0].company_name,
         position: position || dataUser.rows[0].position,
-        password: password ? (await hashPassword(password)) : dataUser.rows[0].password,
+        password: password ? await hashPassword(password) : dataUser.rows[0].password,
         sector: sector || dataUser.rows[0].sector,
         province: province || dataUser.rows[0].province,
         city: city || dataUser.rows[0].city,
@@ -226,6 +239,15 @@ const authController = {
       console.error(`Error : ${error.message}`);
       return res.status(500).json({ status: 500, message: "Failed to delete account" });
     }
+  },
+  verify: async (req, res, next) => {
+    const { id } = req.params;
+    let result = await activatedAccount(id);
+    console.log("result activated company", result);
+    if (result.rowCount !== 0) {
+      return res.status(200).json({ status: 200, message: "Verify success you can login now" });
+    }
+    return res.status(404).json({ status: 404, message: "Verify failed try again" });
   },
 };
 
