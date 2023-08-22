@@ -42,14 +42,17 @@ const checkEmailCompany = async (email) => {
 const postRegisterCompany = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Post/register company");
-    const { name, email, phone, company_name, position, password, validate } = post;
-    pool.query(`INSERT INTO recruiter (name, email, phone, company_name, position, password, validate) VALUES ('${name}', '${email}', '${phone}', '${company_name}', '${position}', '${password}', '${validate}') RETURNING *`, (err, results) => {
-      if (!err) {
-        resolve(results);
-      } else {
-        reject(err);
+    const { name, email, phone, company_name, position, password, validate, photo, photo_id } = post;
+    pool.query(
+      `INSERT INTO recruiter (name, email, phone, company_name, position, password, validate, photo, photo_id) VALUES ('${name}', '${email}', '${phone}', '${company_name}', '${position}', '${password}', '${validate}','${photo}','${photo_id}') RETURNING *`,
+      (err, results) => {
+        if (!err) {
+          resolve(results);
+        } else {
+          reject(err);
+        }
       }
-    });
+    );
   });
 };
 
@@ -84,17 +87,17 @@ const deleteAccountCompany = async (id) => {
 };
 
 const activatedAccount = async (uuid) => {
-  console.log("model activate")
-  return new Promise((resolve,reject)=>
-      pool.query(`UPDATE recruiter SET is_active = true WHERE validate = '${uuid}';`,(err,result)=>{
-          if(!err){
-              resolve(result)
-          } else{
-              reject(err)
-          }
-      })
-  )
-}
+  console.log("model activate");
+  return new Promise((resolve, reject) =>
+    pool.query(`UPDATE recruiter SET is_active = true WHERE validate = '${uuid}';`, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
 
 module.exports = {
   getRegisterCompany,
@@ -103,5 +106,5 @@ module.exports = {
   postRegisterCompany,
   putCompanyById,
   deleteAccountCompany,
-  activatedAccount
+  activatedAccount,
 };

@@ -17,13 +17,12 @@ const getWorkerById = async (id) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Get data worker by id");
     pool.query(`SELECT * FROM worker WHERE id = ${id}`, (err, results) => {
-        if (!err) {
-          resolve(results);
-        } else {
-          reject(err);
-        }
+      if (!err) {
+        resolve(results);
+      } else {
+        reject(err);
       }
-    );
+    });
   });
 };
 
@@ -43,8 +42,8 @@ const checkEmailWorker = async (email) => {
 const postRegisterWorker = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: Post/register worker");
-    const { name, email, phone, password, validate } = post;
-    pool.query(`INSERT INTO worker (name, email, phone, password, validate ) VALUES ('${name}', '${email}', '${phone}', '${password}', '${validate}') RETURNING *`, (err, results) => {
+    const { name, email, phone, password, validate, photo, photo_id } = post;
+    pool.query(`INSERT INTO worker (name, email, phone, password, validate, photo, photo_id ) VALUES ('${name}', '${email}', '${phone}', '${password}', '${validate}', '${photo}', '${photo_id}') RETURNING *`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {
@@ -85,17 +84,17 @@ const deleteAccountWorker = async (id) => {
 };
 
 const activatedAccount = async (uuid) => {
-  console.log("model activate")
-  return new Promise((resolve,reject)=>
-      pool.query(`UPDATE worker SET is_active = true WHERE validate = '${uuid}';`,(err,result)=>{
-          if(!err){
-              resolve(result)
-          } else{
-              reject(err)
-          }
-      })
-  )
-}
+  console.log("model activate");
+  return new Promise((resolve, reject) =>
+    pool.query(`UPDATE worker SET is_active = true WHERE validate = '${uuid}';`, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
 
 module.exports = {
   getRegisterWorker,
@@ -104,5 +103,5 @@ module.exports = {
   postRegisterWorker,
   putWorkerById,
   deleteAccountWorker,
-  activatedAccount
+  activatedAccount,
 };

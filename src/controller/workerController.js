@@ -87,7 +87,7 @@ const authController = {
         post.photo = "https://i.ibb.co/M2JSRmW/noimage.png";
         post.photo_id = "no_image";
       }
-
+      console.log(post);
       const result = await postRegisterWorker(post);
       if (result) {
         console.log("Hasil register pekerja", result.rows);
