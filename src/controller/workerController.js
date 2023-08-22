@@ -3,8 +3,8 @@ const { getRegisterWorker, getWorkerById, checkEmailWorker, postRegisterWorker, 
 const { hashPassword, verifyPassword } = require("../middleware/bcrypt");
 const cloudinary = require("../config/cloudinary");
 const { generateToken } = require("../middleware/jwt");
-const { v4: uuidv4 } = require('uuid');
-const sendEmail = require('../middleware/verifEmail');
+const { v4: uuidv4 } = require("uuid");
+const sendEmail = require("../middleware/verifEmail");
 
 const authController = {
   getWorker: async (req, res) => {
@@ -67,7 +67,7 @@ const authController = {
         });
       }
 
-      let uuid = uuidv4()
+      let uuid = uuidv4();
 
       let post = {
         name: name,
@@ -92,10 +92,10 @@ const authController = {
       if (result) {
         console.log("Hasil register pekerja", result.rows);
 
-        let resultSend = await sendEmail(email, name, `${process.env.BASE_URL}:4000/verify-worker/${uuid}`);
+        let resultSend = await sendEmail(email, name, `http://localhost:5173/email-verify-worker/${uuid}`);
 
         console.log("sendEmail", resultSend);
-        console.log(resultSend)
+        console.log(resultSend);
 
         return res.status(200).json({
           status: 200,
@@ -131,9 +131,7 @@ const authController = {
         const token = generateToken(user);
         user.token = token;
         if (!user.is_active) {
-          return res
-            .status(404)
-            .json({ status: 404, message: "Email has not been activated" });
+          return res.status(404).json({ status: 404, message: "Email has not been activated" });
         }
         return res.status(200).json({
           status: 200,
@@ -173,7 +171,7 @@ const authController = {
         name: name || dataUser.rows[0].name,
         email: email || dataUser.rows[0].email,
         phone: phone || dataUser.rows[0].phone,
-        password: password ? (await hashPassword(password)) : dataUser.rows[0].password,
+        password: password ? await hashPassword(password) : dataUser.rows[0].password,
         jobdesk: jobdesk || dataUser.rows[0].jobdesk,
         address: address || dataUser.rows[0].address,
         office: office || dataUser.rows[0].office,
@@ -220,14 +218,14 @@ const authController = {
     }
   },
   deleteAccount: async (req, res) => {
-    console.log('Control: Running delete account worker')
+    console.log("Control: Running delete account worker");
     try {
-      let user_id = req.payload.id
+      let user_id = req.payload.id;
       // return (console.log(user_id))
-      let dataWorker =  await getWorkerById(user_id)
+      let dataWorker = await getWorkerById(user_id);
 
-      if(user_id != dataWorker.rows[0].id){
-        return res.status(404).json({ status: 404, message: "This not your profile worker!" })
+      if (user_id != dataWorker.rows[0].id) {
+        return res.status(404).json({ status: 404, message: "This not your profile worker!" });
       }
 
       if (req.file) {
@@ -239,12 +237,12 @@ const authController = {
         console.log(result.rows);
         return res.status(200).json({ status: 200, message: "Delete success!" });
       } else {
-        console.log('Data tidak ditemukan')
+        console.log("Data tidak ditemukan");
         return res.status(404).json({ status: 404, message: "Data not found!" });
       }
     } catch (error) {
-        console.error(`Error : ${error.message}`);
-        return res.status(500).json({ status: 500, message: "Failed to delete account" });
+      console.error(`Error : ${error.message}`);
+      return res.status(500).json({ status: 500, message: "Failed to delete account" });
     }
   },
   verify: async (req, res, next) => {
