@@ -63,7 +63,7 @@ const getPortoByIdForRecruit = async (id) => {
 
 const deletePortfolioById = async (id) => {
   return new Promise((resolve, reject) =>
-    Pool.query(`DELETE FROM portfolio WHERE id=${id}`, (err, result) => {
+    Pool.query(`DELETE FROM portfolio WHERE id=${parseInt(id)}`, (err, result) => {
       if (!err) {
         resolve(result);
       } else {
