@@ -67,13 +67,12 @@ const putPorto = async (req, res) => {
   }
 };
 const deletePorto = async (req, res) => {
-  const { id } = req.params;
-  let getPorto = await getPortoById(parseInt(id));
-  console.log(getPorto);
+  const id = req.params.id;
+  let getPorto = await getPortfolioById(id);
   if (getPorto) {
-    await cloudinary.uploader.destroy(getPorto.rows.photo_id);
+    await cloudinary.uploader.destroy(getPorto.rows[0].photo_id);
   }
-  await deletePortfolioById(parseInt(id));
+  await deletePortfolioById(id);
   res.status(StatusCodes.CREATED).json({ msg: "success" });
 };
 module.exports = { getMyPorto, getPortoById, postPorto, putPorto, deletePorto, getPortByIdForRecruit };
