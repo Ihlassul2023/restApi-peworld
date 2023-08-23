@@ -39,7 +39,7 @@ const postPorto = async (req, res) => {
   req.body.photo = result_up?.secure_url;
   req.body.photo_id = result_up?.public_id;
   await postPortfolio(req.body);
-  return res.status(StatusCodes.CREATED).json({ msg: "success", data:req.body});
+  return res.status(StatusCodes.CREATED).json({ msg: "success", data: req.body });
 };
 const putPorto = async (req, res) => {
   const { name, link_repo, type } = req.body;
@@ -68,8 +68,8 @@ const putPorto = async (req, res) => {
 };
 const deletePorto = async (req, res) => {
   const { id } = req.params;
-  let getPorto = await getPortoById(id)
-  if(getPorto){
+  let getPorto = await getPortoById(parseInt(id));
+  if (getPorto) {
     await cloudinary.uploader.destroy(getPorto.rows[0].photo_id);
   }
   await deletePortfolioById(id);
