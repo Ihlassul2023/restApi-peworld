@@ -51,11 +51,25 @@ CREATE TABLE portfolio (
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES worker(id)
 );
-
+--table participant chat 
+CREATE TABLE participant (
+    id SERIAL PRIMARY KEY,
+    user_1 INT NOT NULL,
+    user_2 INT NOT NULL,
+    FOREIGN KEY (user_1) REFERENCES recruiter(id),
+    FOREIGN KEY (user_2) REFERENCES worker(id),
+    chat_code INT NOT NULL
+);
 --MESSAGE MENU--
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
-    message_detail VARCHAR
+    message VARCHAR,
+    user_1 INT NOT NULL,
+    user_2 INT NOT NULL,
+    FOREIGN KEY (user_1) REFERENCES recruiter(id),
+    FOREIGN KEY (user_2) REFERENCES worker(id),
+    chat_code INT NOT NULL,
+    user_id INT NOT NULL
 );
 
 -- table experience
