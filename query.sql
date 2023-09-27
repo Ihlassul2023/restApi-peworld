@@ -58,7 +58,7 @@ CREATE TABLE participant (
     user_2 INT NOT NULL,
     FOREIGN KEY (user_1) REFERENCES recruiter(id),
     FOREIGN KEY (user_2) REFERENCES worker(id),
-    chat_code INT NOT NULL
+    chat_code VARCHAR NULL
 );
 --MESSAGE MENU--
 CREATE TABLE messages (
@@ -68,7 +68,8 @@ CREATE TABLE messages (
     user_2 INT NOT NULL,
     FOREIGN KEY (user_1) REFERENCES recruiter(id),
     FOREIGN KEY (user_2) REFERENCES worker(id),
-    chat_code INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    chat_code VARCHAR NULL,
     user_id INT NOT NULL
 );
 
