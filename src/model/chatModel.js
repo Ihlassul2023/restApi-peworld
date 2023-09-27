@@ -60,9 +60,9 @@ const getMessageQueryByUser2 = async (chat_code) => {
     });
   });
 };
-const getParticipantByUser1 = async () => {
+const getParticipantByUser1 = async (id) => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT recruiter.name,recruiter.photo,participant.chat_code FROM participant JOIN recruiter ON participant.user_1=recruiter.id`, (err, results) => {
+    pool.query(`SELECT recruiter.name,recruiter.photo,participant.chat_code FROM participant JOIN recruiter ON participant.user_1=recruiter.id WHERE participant.user_2=${parseInt(id)}`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {
@@ -71,9 +71,9 @@ const getParticipantByUser1 = async () => {
     });
   });
 };
-const getParticipantByUser2 = async () => {
+const getParticipantByUser2 = async (id) => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT worker.name,worker.photo,participant.chat_code FROM participant JOIN worker ON participant.user_2=worker.id`, (err, results) => {
+    pool.query(`SELECT worker.name,worker.photo,participant.chat_code FROM participant JOIN worker ON participant.user_2=worker.id WHERE participant.user_1=${parseInt(id)}`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {

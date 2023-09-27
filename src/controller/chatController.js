@@ -30,7 +30,7 @@ const postMessage = async (req, res) => {
   });
 };
 const getParticipantUser1 = async (req, res) => {
-  const result = await getParticipantByUser1();
+  const result = await getParticipantByUser1(req.payload.id);
   res.status(200).json({
     status: 200,
     message: "get success",
@@ -38,7 +38,7 @@ const getParticipantUser1 = async (req, res) => {
   });
 };
 const getParticipantUser2 = async (req, res) => {
-  const result = await getParticipantByUser2();
+  const result = await getParticipantByUser2(req.payload.id);
   res.status(200).json({
     status: 200,
     message: "get success",
