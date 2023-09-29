@@ -51,6 +51,7 @@ const getMessageUser1 = async (req, res) => {
     status: 200,
     message: "get success",
     profile: {
+      id: result.rows[0].id,
       name: result.rows[0].name,
       photo: result.rows[0].photo,
     },
@@ -63,6 +64,7 @@ const getMessageUser2 = async (req, res) => {
     status: 200,
     message: "get success",
     profile: {
+      id: result.rows[0].id,
       name: result.rows[0].name,
       photo: result.rows[0].photo,
     },
