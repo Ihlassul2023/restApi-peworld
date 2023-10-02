@@ -91,7 +91,7 @@ const searchAndSortCount = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: search and sort worker", post);
     const { searchby, search, sortby, sort, offset, limit } = post;
-    Pool.query(`SELECT COUNT(*) FROM worker WHERE JOIN skill ON worker.id=skill.user_id ${searchby} ILIKE '%${search}%' ORDER BY ${sortby} ${sort} OFFSET ${offset} LIMIT ${limit}`, (err, results) => {
+    Pool.query(`SELECT COUNT(*) FROM skill JOIN worker ON skill.user_id = worker.id WHERE ${searchby} ILIKE '%${search}%' ORDER BY ${sortby} ${sort} OFFSET ${offset} LIMIT ${limit}`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {
