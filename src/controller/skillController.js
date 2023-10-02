@@ -137,7 +137,7 @@ const SkillController = {
       // const resultTotal = await getSkillAll();
       const result = await searchAndSort(post);
       let pagination = {
-        totalPage: Math.ceil(result.rowCount / limiter),
+        totalPage: Math.ceil(result.count / limiter),
         totalData: parseInt(result.count),
         pageNow: page,
       };
