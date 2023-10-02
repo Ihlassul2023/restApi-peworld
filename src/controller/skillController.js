@@ -90,12 +90,12 @@ const SkillController = {
       }
       let data = {
         skill_name: skill_name || dataSkillId.rows[0].skill_name,
-        user_id: id
+        user_id: id,
       };
 
       let result = await putSkill(data);
 
-      return res.status(200).json({ status: 200, message: "update skill success", data:result.rows[0] });
+      return res.status(200).json({ status: 200, message: "update skill success", data: result.rows[0] });
     } catch (err) {
       return res.status(404).json({ status: 404, message: err.message });
     }
@@ -120,39 +120,39 @@ const SkillController = {
     }
   },
   searchSort: async (req, res) => {
-    console.log('Control: Running search sort worker')
+    console.log("Control: Running search sort worker");
     try {
-      const {searchby, search, sortby, sort, limit} = req.query
+      const { searchby, search, sortby, sort, limit } = req.query;
       let page = parseInt(req.query.page) || 1;
-      let limiter = limit || 5
+      let limiter = limit || 5;
 
       const post = {
-        sortby: sortby || 'name',
-        sort: sort || 'ASC',
+        sortby: sortby || "name",
+        sort: sort || "ASC",
         limit: limit || 5,
         offset: (page - 1) * limiter,
-        searchby: searchby || 'skill',
-        search: search 
+        searchby: searchby || "skill",
+        search: search,
       };
-      const resultTotal = await getSkillAll()
+      // const resultTotal = await getSkillAll();
       const result = await searchAndSort(post);
       let pagination = {
-        totalPage: Math.ceil(resultTotal.rowCount / limiter),
+        totalPage: Math.ceil(result.rowCount / limiter),
         totalData: parseInt(result.count),
-        pageNow: page
+        pageNow: page,
       };
       if (result.rows.length > 0) {
         console.log(result.rows);
-        return res.status(200).json({data:result.rows, page:pagination});
+        return res.status(200).json({ data: result.rows, page: pagination });
       } else {
-        console.log('Data tidak ditemukan');
-        return res.status(404).json({status: 404, message: "Data not found"});
+        console.log("Data tidak ditemukan");
+        return res.status(404).json({ status: 404, message: "Data not found" });
       }
     } catch (error) {
-        console.error(`Error : ${error.message}`);
-        return res.status(500).json({status: 500, message: "Search and sort data error"});
+      console.error(`Error : ${error.message}`);
+      return res.status(500).json({ status: 500, message: "Search and sort data error" });
     }
-  }
+  },
 };
 
 module.exports = SkillController;
