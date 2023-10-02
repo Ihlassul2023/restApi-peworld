@@ -86,11 +86,12 @@ const searchAndSort = async (post) => {
     );
   });
 };
+//JOIN worker ON skill.user_id = worker.id
 const searchAndSortCount = async (post) => {
   return new Promise((resolve, reject) => {
     console.log("Model: search and sort worker", post);
     const { searchby, search } = post;
-    Pool.query(`SELECT COUNT(*) FROM skill JOIN worker ON skill.user_id = worker.id WHERE ${searchby} ILIKE '%${search}%'`, (err, results) => {
+    Pool.query(`SELECT COUNT(*) FROM worker WHERE ${searchby} ILIKE '%${search}%'`, (err, results) => {
       if (!err) {
         resolve(results);
       } else {
