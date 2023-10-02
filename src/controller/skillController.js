@@ -1,4 +1,4 @@
-const { getSkillAll, getSkillById, postSkill, putSkill, deleteById, searchAndSort } = require("../model/skillModel");
+const { getSkillAll, getSkillById, postSkill, putSkill, deleteById, searchAndSort, searchAndSortCount } = require("../model/skillModel");
 
 const SkillController = {
   getData: async (req, res, next) => {
@@ -134,11 +134,11 @@ const SkillController = {
         searchby: searchby || "skill",
         search: search,
       };
-      // const resultTotal = await getSkillAll();
+      const resultTotal = await searchAndSortCount(post);
       const result = await searchAndSort(post);
       let pagination = {
-        totalPage: Math.ceil(result.rows.length / limiter),
-        totalData: parseInt(result.count),
+        totalPage: Math.ceil(resultTotal.rows[0].count / limiter),
+        totalData: parseInt(resultTotal.rows[0].count),
         pageNow: page,
       };
       if (result.rows.length > 0) {
